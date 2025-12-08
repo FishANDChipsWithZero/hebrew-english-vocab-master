@@ -3,12 +3,19 @@ import { WordPair } from "../types";
 // Client-side service now communicates with the Vercel Serverless Function
 // This keeps the API Key secure on the server.
 
+// Helper to get current user from session
+const getAuthUser = () => {
+  const savedUser = sessionStorage.getItem('authUser');
+  return savedUser ? JSON.parse(savedUser) : null;
+};
+
 export const extractWordsFromText = async (text: string): Promise<WordPair[]> => {
   try {
+    const authUser = getAuthUser();
     const response = await fetch('/api/gemini', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'text', content: text }),
+      body: JSON.stringify({ type: 'text', content: text, authUser }),
     });
 
     if (!response.ok) {
@@ -52,10 +59,11 @@ export const loadPresetBand = async (bandFileName: string): Promise<WordPair[]> 
 
 export const extractWordsFromImage = async (base64Image: string): Promise<WordPair[]> => {
   try {
+    const authUser = getAuthUser();
     const response = await fetch('/api/gemini', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'image', content: base64Image }),
+      body: JSON.stringify({ type: 'image', content: base64Image, authUser }),
     });
 
     if (!response.ok) {
@@ -78,10 +86,11 @@ export const extractWordsFromImage = async (base64Image: string): Promise<WordPa
 
 export const translateSentence = async (sentence: string): Promise<string> => {
   try {
+    const authUser = getAuthUser();
     const response = await fetch('/api/gemini', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'translate', content: sentence }),
+      body: JSON.stringify({ type: 'translate', content: sentence, authUser }),
     });
 
     if (!response.ok) throw new Error(`Server error: ${response.statusText}`);

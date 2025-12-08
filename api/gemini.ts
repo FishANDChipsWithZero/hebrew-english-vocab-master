@@ -28,6 +28,13 @@ export default async function handler(request: any, response: any) {
     return response.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Check authentication - verify user is logged in (session-based)
+  // In production, you could validate a JWT token or session cookie
+  const authUser = request.body.authUser;
+  if (!authUser || !authUser.email) {
+    return response.status(401).json({ error: 'Unauthorized - Please login' });
+  }
+
   try {
     const { type, content } = request.body;
 

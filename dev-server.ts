@@ -35,7 +35,12 @@ const responseSchema = {
 
 app.post('/gemini', async (req, res) => {
   try {
-    const { type, content } = req.body;
+    const { type, content, authUser } = req.body;
+
+    // Check authentication in dev mode (same as production)
+    if (!authUser || !authUser.email) {
+      return res.status(401).json({ error: 'Unauthorized - Please login' });
+    }
 
     if (!content) {
       return res.status(400).json({ error: 'Content is required' });
@@ -60,20 +65,6 @@ app.post('/gemini', async (req, res) => {
       });
       
       res.json(JSON.parse(geminiResponse.text || '[]'));
-    } else if (type === 'translate') {
-      // Translate a single English sentence to Hebrew but preserve blanks (underscores)
-      const geminiResponse = await ai.models.generateContent({
-        model: 'gemini-2.0-flash',
-        contents: `Translate the following English sentence to Hebrew. Keep any blank placeholders (underscore sequences) as underscores — do not translate or replace them. Return ONLY the translated sentence (no extra commentary).
-
-Sentence:
-${content}`,
-        config: {
-          responseMimeType: 'text/plain',
-        },
-      });
-
-      res.json({ translation: geminiResponse.text });
     } else {
       res.status(400).json({ error: 'Invalid type' });
     }
