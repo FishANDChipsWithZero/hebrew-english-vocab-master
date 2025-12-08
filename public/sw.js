@@ -2,7 +2,6 @@ const CACHE_NAME = 'vocab-master-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/vite.svg',
   '/manifest.json'
 ];
 
