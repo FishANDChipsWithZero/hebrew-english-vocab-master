@@ -119,6 +119,11 @@
   font-weight: 600;
 }
 
+/* Force Heebo font for all Hebrew content */
+.heebo-font {
+  font-family: 'Heebo', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Hebrew', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif !important;
+}
+
 /* Small variant for hint boxes to be slightly larger and clear */
 .hebrew-text.small { font-size: 1rem; line-height: 1.45; }
 

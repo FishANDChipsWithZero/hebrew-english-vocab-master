@@ -105,7 +105,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
     <>
     <div className="w-full max-w-2xl mx-auto bg-slate-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-slate-700 animate-slide-up relative z-10 neon-border">
       <div className="relative mb-3 sm:mb-5">
-        <h2 className="text-base sm:text-lg md:text-xl font-black text-center text-white neon-text-glow pr-12 sm:pr-0">
+        <h2 className="text-base sm:text-lg md:text-xl font-black text-center text-white neon-text-glow pr-12 sm:pr-0 heebo-font">
           {getGenderedText(user, 'בחר מה ללמוד/לתרגל', 'בחרי מה ללמוד/לתרגל', 'בחר/י מה ללמוד/לתרגל')}
         </h2>
         {/** Back button to return to onboarding (only shown when handler provided) */}
@@ -123,7 +123,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
         <div className="mb-4 text-center">
           <button
             onClick={onResume}
-            className="btn-3d bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-extrabold py-2.5 px-6 rounded-2xl shadow-xl text-sm sm:text-base transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none animate-pulse-slow"
+            className="heebo-font btn-3d bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-extrabold py-2.5 px-6 rounded-2xl shadow-xl text-sm sm:text-base transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none animate-pulse-slow"
           >
             <span className="inline-block mr-1 text-base">▶️</span>
             <span className="align-middle">המשך תרגול</span>
@@ -132,8 +132,8 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
         </div>
       )}
 
-      {/* Classroom preset - only Unit 2 button (students cannot add words) */}
-      <div className="mb-4 flex flex-wrap gap-2 justify-center">
+      {/* Classroom preset - cleaner unified design */}
+      <div className="mb-4 grid grid-cols-2 gap-3 max-w-md mx-auto">
         <button
           onClick={async () => {
             setLoading(true);
@@ -148,18 +148,18 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`btn-3d bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-slate-900 font-extrabold py-2.5 px-5 rounded-2xl shadow-xl text-sm sm:text-base transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none ${presetFilename === 'unit2_new_direction_plus.json' ? 'ring-4 ring-cyan-500/30' : ''}`}
+          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'unit2_new_direction_plus.json' ? 'ring-2 ring-cyan-400' : ''}`}
         >
-          <span className="inline-block mr-1 text-base">🚀</span>
-          <span className="align-middle">תרגול מילים</span>
+          <div className="text-lg mb-1">🚀</div>
+          <div>תרגול מילים</div>
         </button>
 
         <button
           onClick={() => setShowVocab(true)}
-          className={`btn-3d bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-extrabold py-2.5 px-4 rounded-2xl shadow-xl text-sm sm:text-base transition-transform transform hover:scale-105 active:scale-95`}
+          className="heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95"
         >
-          <span className="inline-block mr-1 text-base">📚</span>
-          <span className="align-middle">אוצר המילים</span>
+          <div className="text-lg mb-1">📚</div>
+          <div>אוצר המילים</div>
         </button>
 
         <button
@@ -176,15 +176,15 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`btn-3d bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-extrabold py-2.5 px-5 rounded-2xl shadow-xl text-sm sm:text-base transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none ${presetFilename === 'sentences_practice.json' ? 'ring-4 ring-cyan-500/30' : ''}`}
+          className={`heebo-font col-span-2 btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'sentences_practice.json' ? 'ring-2 ring-cyan-400' : ''}`}
         >
-          <span className="inline-block mr-1 text-base">✍️</span>
+          <span className="inline-block mr-2 text-lg">✍️</span>
           <span className="align-middle">תרגול משפטים</span>
         </button>
       </div>
 
       {/* Past Simple / Progressive Buttons */}
-      <div className="mb-4 flex flex-wrap gap-2 justify-center">
+      <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md mx-auto">
         <button
           onClick={async () => {
             setLoading(true);
@@ -199,10 +199,11 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`btn-3d bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white font-extrabold py-2.5 px-4 rounded-2xl shadow-xl text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none ${presetFilename === 'past_simple_progressive.json' ? 'ring-4 ring-cyan-500/30' : ''}`}
+          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'past_simple_progressive.json' ? 'ring-2 ring-cyan-400' : ''}`}
         >
-          <span className="inline-block mr-1 text-sm">⏰</span>
-          <span className="align-middle">Past Simple / Progressive - תרגול</span>
+          <div className="text-base mb-1">⏰</div>
+          <div>Past Simple/Progressive</div>
+          <div className="text-[10px] opacity-75">תרגול</div>
         </button>
 
         <button
@@ -210,10 +211,11 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
             // Navigate to learning mode
             onWordsReady([], 'learn_past_tense');
           }}
-          className="btn-3d bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white font-extrabold py-2.5 px-4 rounded-2xl shadow-xl text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none"
+          className="heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95"
         >
-          <span className="inline-block mr-1 text-sm">📖</span>
-          <span className="align-middle">Past Simple / Progressive - לימוד</span>
+          <div className="text-base mb-1">📖</div>
+          <div>Past Simple/Progressive</div>
+          <div className="text-[10px] opacity-75">לימוד</div>
         </button>
       </div>
 
@@ -232,7 +234,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               alert('ההתקדמות אופסה בהצלחה! עכשיו תוכל להתחיל מחדש.');
             }
           }}
-          className="btn-3d bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-1.5 px-4 rounded-xl text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95"
+          className="heebo-font btn-3d bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-1.5 px-4 rounded-xl text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95"
         >
           <span className="inline-block mr-1 text-sm">🔄</span>
           <span className="align-middle">איפוס התקדמות</span>

@@ -166,7 +166,7 @@ const App: React.FC = () => {
         )}
 
         {step === AppStep.SUCCESS && user && (
-          <div className="text-center bg-slate-800/90 backdrop-blur-lg p-10 md:p-14 rounded-[3rem] shadow-2xl max-w-xl mx-auto border-4 border-yellow-400 animate-pop-in relative neon-border">
+          <div className="text-center bg-slate-800/90 backdrop-blur-lg p-10 md:p-14 rounded-[3rem] shadow-2xl max-w-xl mx-auto border-4 border-yellow-400 animate-pop-in relative neon-border heebo-font">
             <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 text-8xl filter drop-shadow-[0_0_20px_rgba(234,179,8,0.5)] animate-bounce">🏆</div>
             <h2 className="text-5xl font-black text-white mb-6 mt-8 neon-text-glow">
               ניצחון!
@@ -176,9 +176,9 @@ const App: React.FC = () => {
                 כל הכבוד {user.name}!
               </p>
               <p className="text-slate-400">
-                סיימת את כל המילים בהצלחה.
+                סיימת את כל התרגול בהצלחה!
                 <br/>
-                <span className="font-bold text-cyan-400">מוכן/ה למבחן!</span>
+                <span className="font-bold text-cyan-400">עבודה מצוינת!</span>
               </p>
             </div>
             
