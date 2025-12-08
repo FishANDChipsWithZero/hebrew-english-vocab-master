@@ -85,6 +85,38 @@ const expandWithSynonyms = (term: string) => {
   return Array.from(new Set(list.map(normalize)));
 };
 
+// Strict answer checking for grammar exercises (Past Simple/Progressive)
+// Only accepts exact matches with comma-separated answers
+export const checkAnswerQualityStrict = (userAnswer: string, correctAnswer: string): AnswerQuality => {
+  if (!userAnswer || !correctAnswer) return 'wrong';
+  
+  // Normalize: lowercase, trim spaces, normalize commas
+  const normalizeStrict = (str: string) => {
+    return str.toLowerCase().trim()
+      .replace(/\s*,\s*/g, ', ') // normalize comma spacing
+      .replace(/\s+/g, ' '); // normalize multiple spaces
+  };
+  
+  const cleanUser = normalizeStrict(userAnswer);
+  const cleanCorrect = normalizeStrict(correctAnswer);
+  
+  // For strict mode, only exact match counts
+  if (cleanUser === cleanCorrect) return 'exact';
+  
+  // Also check if answers are comma-separated and match in any order
+  if (cleanCorrect.includes(',')) {
+    const correctParts = cleanCorrect.split(',').map(s => s.trim()).sort();
+    const userParts = cleanUser.split(',').map(s => s.trim()).sort();
+    
+    if (correctParts.length === userParts.length && 
+        correctParts.every((part, idx) => part === userParts[idx])) {
+      return 'exact';
+    }
+  }
+  
+  return 'wrong';
+};
+
 export const checkAnswerQuality = (userAnswer: string, correctAnswer: string): AnswerQuality => {
   const cleanUser = normalize(userAnswer);
     const cleanCorrect = normalize(correctAnswer);

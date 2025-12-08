@@ -3,6 +3,7 @@ import { AppStep, User, WordPair } from './types';
 import Onboarding from './components/Onboarding';
 import InputSelection from './components/InputSelection';
 import Game from './components/Game';
+import PastTenseLearn from './components/PastTenseLearn';
 import { createConfetti, decodeWordsData } from './utils';
 
 const App: React.FC = () => {
@@ -65,6 +66,13 @@ const App: React.FC = () => {
 
   const handleWordsReady = (extractedWords: WordPair[], sourcePresetFilename?: string | null) => {
     setLoading(false);
+    
+    // Check if this is learning mode
+    if (sourcePresetFilename === 'learn_past_tense') {
+      setStep(AppStep.PAST_TENSE_LEARN);
+      return;
+    }
+    
     setWords(extractedWords);
     if (sourcePresetFilename) setPresetFilename(sourcePresetFilename);
     setStep(AppStep.GAME);
@@ -129,11 +137,15 @@ const App: React.FC = () => {
         )}
 
         {step === AppStep.INPUT_SELECTION && (
-          <InputSelection onWordsReady={handleWordsReady} setLoading={setLoading} presetFilename={presetFilename} autoLoadOnMount={autoLoadOnMount} onBack={() => setStep(AppStep.ONBOARDING)} />
+          <InputSelection user={user} onWordsReady={handleWordsReady} setLoading={setLoading} presetFilename={presetFilename} autoLoadOnMount={autoLoadOnMount} onBack={() => setStep(AppStep.ONBOARDING)} />
         )}
 
         {step === AppStep.GAME && user && (
-          <Game words={words} user={user} presetFilename={presetFilename} onFinish={handleGameFinish} onBack={() => setStep(AppStep.INPUT_SELECTION)} />
+          <Game words={words} user={user} presetFilename={presetFilename} onFinish={handleGameFinish} onBack={() => setStep(AppStep.INPUT_SELECTION)} onBackToSettings={() => setStep(AppStep.ONBOARDING)} />
+        )}
+
+        {step === AppStep.PAST_TENSE_LEARN && (
+          <PastTenseLearn onBack={() => setStep(AppStep.INPUT_SELECTION)} onBackToSettings={() => setStep(AppStep.ONBOARDING)} />
         )}
 
         {step === AppStep.SUCCESS && user && (

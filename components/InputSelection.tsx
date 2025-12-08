@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import BackButton from './BackButton';
 import VocabModal from './VocabModal';
 import { extractWordsFromImage, extractWordsFromText, loadPresetBand } from '../services/geminiService';
-import { WordPair } from '../types';
+import { WordPair, User } from '../types';
+import { getGenderedText } from '../genderUtils';
 
 interface InputSelectionProps {
+  user: User | null;
   // second optional param is the source preset filename (when available)
   onWordsReady: (words: WordPair[], presetFilename?: string | null) => void;
   setLoading: (loading: boolean) => void;
@@ -14,7 +16,7 @@ interface InputSelectionProps {
   onBack?: () => void;
 }
 
-const InputSelection: React.FC<InputSelectionProps> = ({ onWordsReady, setLoading, presetFilename, autoLoadOnMount = false, onBack }) => {
+const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, setLoading, presetFilename, autoLoadOnMount = false, onBack }) => {
   const [activeTab, setActiveTab] = useState<'text' | 'image'>('text');
   const [textInput, setTextInput] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -100,16 +102,16 @@ const InputSelection: React.FC<InputSelectionProps> = ({ onWordsReady, setLoadin
 
   return (
     <>
-    <div className="max-w-2xl w-full mx-auto bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-8 border border-slate-700 animate-slide-up relative z-10 neon-border px-4">
-      <div className="relative mb-6">
-        <h2 className="text-3xl font-black text-center text-white neon-text-glow">
-          יאללה בואו נתחיל
+    <div className="w-full max-w-2xl mx-auto bg-slate-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-slate-700 animate-slide-up relative z-10 neon-border">
+      <div className="relative mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-center text-white neon-text-glow pr-12 sm:pr-0">
+          {getGenderedText(user, 'בחר מה ללמוד/לתרגל', 'בחרי מה ללמוד/לתרגל', 'בחר/י מה ללמוד/לתרגל')}
         </h2>
         {/** Back button to return to onboarding (only shown when handler provided) */}
         {typeof onBack === 'function' && (
           <div className="absolute top-0 right-0">
             <BackButton onClick={() => onBack && onBack()} small>
-              חזור
+              הגדרות
             </BackButton>
           </div>
         )}
@@ -162,6 +164,62 @@ const InputSelection: React.FC<InputSelectionProps> = ({ onWordsReady, setLoadin
         >
           <span className="inline-block mr-2">✍️</span>
           <span className="align-middle">תרגול משפטים</span>
+        </button>
+      </div>
+
+      {/* Past Simple / Progressive Buttons */}
+      <div className="mb-6 flex gap-3 justify-center">
+        <button
+          onClick={async () => {
+            setLoading(true);
+            setError(null);
+            try {
+              const words = await loadPresetBand('past_simple_progressive.json');
+              if (!words || words.length === 0) throw new Error('No past tense exercises loaded');
+              onWordsReady(words, 'past_simple_progressive.json');
+            } catch (e: any) {
+              console.error(e);
+              setError('לא ניתן לטעון את תרגילי Past Simple/Progressive');
+              setLoading(false);
+            }
+          }}
+          className={`btn-3d bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white font-extrabold py-4 px-8 rounded-3xl shadow-2xl text-lg transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none ${presetFilename === 'past_simple_progressive.json' ? 'ring-4 ring-cyan-500/30' : ''}`}
+        >
+          <span className="inline-block mr-2">⏰</span>
+          <span className="align-middle">Past Simple / Progressive - תרגול</span>
+        </button>
+
+        <button
+          onClick={() => {
+            // Navigate to learning mode
+            onWordsReady([], 'learn_past_tense');
+          }}
+          className="btn-3d bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white font-extrabold py-4 px-8 rounded-3xl shadow-2xl text-lg transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none"
+        >
+          <span className="inline-block mr-2">📖</span>
+          <span className="align-middle">Past Simple / Progressive - לימוד</span>
+        </button>
+      </div>
+
+      {/* Reset Progress Button */}
+      <div className="flex justify-center mb-4">
+        <button
+          onClick={() => {
+            if (confirm('האם אתה בטוח שברצונך לאפס את כל ההתקדמות? פעולה זו תמחק את כל המילים שכבר למדת.')) {
+              // Get user ID from user object
+              const userId = (user?.name || 'anon').replace(/\s+/g, '_');
+              // Clear all progress for this user
+              const keys = Object.keys(localStorage).filter(k => k.startsWith(`progress:${userId}:`));
+              keys.forEach(k => localStorage.removeItem(k));
+              // Also clear XP
+              localStorage.removeItem(`xp:${userId}`);
+              alert('ההתקדמות אופסה בהצלחה! עכשיו תוכל להתחיל מחדש.');
+            }
+          }}
+          className="btn-3d bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-2 px-6 rounded-xl text-sm transition-transform transform hover:scale-105 active:scale-95"
+        >
+          <span className="inline-block mr-2">🔄</span>
+          <span className="align-middle">איפוס התקדמות</span>
         </button>
       </div>
 

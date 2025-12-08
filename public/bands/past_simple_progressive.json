@@ -1,0 +1,196 @@
+[
+  {
+    "id": "past_1",
+    "english": "They ___________ (play) outside when it suddenly ___________ (start) to rain.",
+    "hebrew": "played, started",
+    "options": [
+      "played, was starting",
+      "played, started",
+      "were playing, started"
+    ],
+    "correctIndex": 2,
+    "explanation": "הפעולה של המשחק בחוץ הייתה מתמשכת (Past Continuous) עד שהיא נקטעה על ידי הפעולה הקצרה של תחילת הגשם (Past Simple)."
+  },
+  {
+    "id": "past_2",
+    "english": "I ___________ (fall) asleep while I ___________ (listen) to music.",
+    "hebrew": "fell, was listening",
+    "options": [
+      "fell, was listening",
+      "was falling, listened",
+      "fell, listened",
+      "was falling, was listening"
+    ],
+    "correctIndex": 0,
+    "explanation": "ההאזנה למוזיקה היא פעולת רקע מתמשכת (Past Continuous) שבמהלכה התרחשה פעולה קצרה ופתאומית של הירדמות (Past Simple)."
+  },
+  {
+    "id": "past_3",
+    "english": "While Vanessa and her brother ___________ (travel), they ___________ (record) their adventures.",
+    "hebrew": "were traveling, were recording",
+    "options": [
+      "traveled, recorded",
+      "were traveling, were recording",
+      "traveled, were recording",
+      "were traveling, recorded"
+    ],
+    "correctIndex": 1,
+    "explanation": "שתי הפעולות, הטיול וההקלטה, התרחשו במקביל לאורך זמן, ולכן שתיהן מתוארות בזמן Past Continuous."
+  },
+  {
+    "id": "past_4",
+    "english": "The teacher ___________ (ask) a question while I ___________ (daydream).",
+    "hebrew": "asked, was daydreaming",
+    "options": [
+      "asked, daydreamed",
+      "asked, was daydreaming",
+      "was asking, daydreamed",
+      "was asking, was daydreaming"
+    ],
+    "correctIndex": 1,
+    "explanation": "החלום בהקיץ הוא פעולת רקע מתמשכת (Past Continuous), אשר נקטעה על ידי הפעולה הקצרה של המורה ששאל שאלה (Past Simple)."
+  },
+  {
+    "id": "past_5",
+    "english": "What ___________ (you/do) at 10 o'clock last night?",
+    "hebrew": "were you doing",
+    "options": [
+      "did you do",
+      "were you doing",
+      "did you doing",
+      "you were doing"
+    ],
+    "correctIndex": 1,
+    "explanation": "השאלה מתמקדת בפעולה שהייתה בתהליך בזמן ספציפי בעבר (10 o'clock), ולכן נדרש שימוש ב-Past Continuous."
+  },
+  {
+    "id": "past_6",
+    "english": "I ___________ (walk) along the street when suddenly I ___________ (hear) footsteps behind me.",
+    "hebrew": "was walking, heard",
+    "options": [
+      "was walking, heard",
+      "walked, heard",
+      "was walking, was hearing",
+      "walked, was hearing"
+    ],
+    "correctIndex": 0,
+    "explanation": "ההליכה ברחוב היא פעולת רקע מתמשכת (Past Continuous), והשמיעה הפתאומית של הצעדים היא הפעולה הקצרה שקטעה אותה (Past Simple)."
+  },
+  {
+    "id": "past_7",
+    "english": "Sam ___________ (take) a picture of me while I ___________ (not look).",
+    "hebrew": "took, was not looking",
+    "options": [
+      "was taking, did not look",
+      "was taking, was not looking",
+      "took, did not look",
+      "took, was not looking"
+    ],
+    "correctIndex": 3,
+    "explanation": "צילום התמונה הוא פעולה קצרה (Past Simple) שהתרחשה בזמן שהפעולה של 'לא להסתכל' הייתה מתמשכת (Past Continuous)."
+  },
+  {
+    "id": "past_8",
+    "english": "Last night I ___________ (drop) a plate when I ___________ (do) the washing-up.",
+    "hebrew": "dropped, was doing",
+    "options": [
+      "was dropping, was doing",
+      "dropped, did",
+      "was dropping, did",
+      "dropped, was doing"
+    ],
+    "correctIndex": 3,
+    "explanation": "שטיפת הכלים היא פעולת רקע מתמשכת (Past Continuous), והפלת הצלחת היא פעולה קצרה ופתאומית (Past Simple) שקרתה במהלכה."
+  },
+  {
+    "id": "past_9",
+    "english": "My friends ___________ (arrive) while I ___________ (have) a shower.",
+    "hebrew": "arrived, was having",
+    "options": [
+      "arrived, was having",
+      "were arriving, were having",
+      "arrived, had",
+      "were arriving, had"
+    ],
+    "correctIndex": 0,
+    "explanation": "המקלחת היא פעולת רקע מתמשכת (Past Continuous), וההגעה של החברים היא פעולה קצרה (Past Simple) שקרתה במהלכה."
+  },
+  {
+    "id": "past_10",
+    "english": "While his colleagues ___________ (try) to call him, he ___________ (appear).",
+    "hebrew": "were trying, appeared",
+    "options": [
+      "were trying, appeared",
+      "tried, appeared",
+      "were trying, was appearing",
+      "tried, was appearing"
+    ],
+    "correctIndex": 0,
+    "explanation": "הניסיונות להתקשר היו פעולה מתמשכת (Past Continuous) ששימשה רקע להופעתו הפתאומית (Past Simple)."
+  },
+  {
+    "id": "past_11",
+    "english": "How fast ___________ (you/drive) when the accident ___________ (happen)?",
+    "hebrew": "were you driving, happened",
+    "options": [
+      "did you drive, was happening",
+      "were you driving, happened",
+      "were you driving, was happening",
+      "did you drive, happened"
+    ],
+    "correctIndex": 1,
+    "explanation": "השאלה מתייחסת לפעולת הנהיגה המתמשכת (Past Continuous) ברקע, וכיצד היא נקטעה על ידי התאונה (Past Simple)."
+  },
+  {
+    "id": "past_12",
+    "english": "We ___________ (watch) a film when the electricity ___________ (go) off.",
+    "hebrew": "were watching, went",
+    "options": [
+      "were watching, was going",
+      "watched, was going",
+      "were watching, went",
+      "watched, went"
+    ],
+    "correctIndex": 2,
+    "explanation": "הצפייה בסרט הייתה פעולה מתמשכת (Past Continuous) אשר נקטעה על ידי הפסקת החשמל, שהיא אירוע קצר ופתאומי (Past Simple)."
+  },
+  {
+    "id": "past_13",
+    "english": "At 6 PM yesterday, I ___________ (cook) dinner.",
+    "hebrew": "was cooking",
+    "options": [
+      "was cooking",
+      "cooked",
+      "did cook",
+      "had cooked"
+    ],
+    "correctIndex": 0,
+    "explanation": "המשפט מתאר פעולה שהייתה בתהליך בנקודת זמן ספציפית בעבר (6 PM yesterday), ולכן נדרש שימוש ב-Past Continuous."
+  },
+  {
+    "id": "past_14",
+    "english": "Sylvia ___________ (have) an accident because she ___________ (not watch) the road.",
+    "hebrew": "had, was not watching",
+    "options": [
+      "had, did not watch",
+      "was having, did not watch",
+      "had, was not watching",
+      "was having, was not watching"
+    ],
+    "correctIndex": 2,
+    "explanation": "התאונה היא אירוע קצר (Past Simple), והסיבה לה היא פעולת רקע מתמשכת של חוסר תשומת לב לכביש (Past Continuous)."
+  },
+  {
+    "id": "past_15",
+    "english": "While I ___________ (study) at university, I ___________ (choose) to travel to a different country.",
+    "hebrew": "was studying, chose",
+    "options": [
+      "was studying, was choosing",
+      "studied, was choosing",
+      "studied, chose",
+      "was studying, chose"
+    ],
+    "correctIndex": 3,
+    "explanation": "הלימודים באוניברסיטה הם פעולת רקע מתמשכת (Past Continuous), והבחירה לנסוע היא החלטה ספציפית (Past Simple) שנעשתה במהלך אותה תקופה."
+  }
+]

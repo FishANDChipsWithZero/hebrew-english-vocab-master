@@ -1,0 +1,9 @@
+{
+  "note": "זהו קובץ placeholder - יש להוסיף את קבצי האינפוגרפיקות לתיקייה זו",
+  "required_files": [
+    "past_simple.jpg",
+    "past_progressive.jpg", 
+    "past_diff.jpg"
+  ],
+  "instructions": "ראה README.md להוראות מלאות"
+}

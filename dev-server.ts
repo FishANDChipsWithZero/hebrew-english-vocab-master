@@ -65,6 +65,17 @@ app.post('/gemini', async (req, res) => {
       });
       
       res.json(JSON.parse(geminiResponse.text || '[]'));
+    } else if (type === 'translate') {
+      // Translate English sentence to Hebrew
+      const geminiResponse = await ai.models.generateContent({
+        model: 'gemini-2.0-flash',
+        contents: `Translate the following English sentence to Hebrew. Return ONLY the Hebrew translation, nothing else.
+
+Sentence: ${content}`,
+      });
+      
+      const translation = geminiResponse.text?.trim() || '';
+      res.json({ translation });
     } else {
       res.status(400).json({ error: 'Invalid type' });
     }

@@ -4,11 +4,13 @@ export enum AppStep {
   PROCESSING = 'PROCESSING',
   GAME = 'GAME',
   SUCCESS = 'SUCCESS',
+  PAST_TENSE_LEARN = 'PAST_TENSE_LEARN',
 }
 
 export interface User {
   name: string;
   avatar?: string; // filename or URL under /avatars/
+  gender?: 'male' | 'female' | 'other';
 }
 
 export interface WordPair {
@@ -17,6 +19,9 @@ export interface WordPair {
   hebrew: string;
   successCount: number; // 0 to 3
   lastPlayedTurn?: number; // Turn number when this word was last asked
+  options?: string[]; // Multiple choice options (if present, this is a multiple choice question)
+  correctIndex?: number; // Index of the correct answer in options array
+  explanation?: string; // Explanation for the correct answer
 }
 
 export interface GameState {

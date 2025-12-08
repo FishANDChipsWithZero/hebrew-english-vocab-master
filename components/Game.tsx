@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import BackButton from './BackButton';
 import { WordPair, User } from '../types';
-import { checkAnswerQuality, createConfetti, AnswerQuality, playSound } from '../utils';
+import { checkAnswerQuality, checkAnswerQualityStrict, createConfetti, AnswerQuality, playSound } from '../utils';
 import { translateSentence } from '../services/geminiService';
 
 interface GameProps {
@@ -11,6 +11,7 @@ interface GameProps {
   presetFilename?: string | null;
   onFinish: () => void;
   onBack: () => void;
+  onBackToSettings?: () => void;
 }
 
 const REQUIRED_WINS = 3;
@@ -40,7 +41,7 @@ const POS_MAP: Record<string, string> = {
   'expression': 'EXPRESSION'
 };
 
-const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBack }) => {
+const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBack, onBackToSettings }) => {
   // State
   const [activeWords, setActiveWords] = useState<WordPair[]>([]);
   const [currentWord, setCurrentWord] = useState<WordPair | null>(null);
@@ -99,7 +100,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
       let merged = incoming;
       try {
         if ((window as any).localStorage && (arguments.length || true)) {
-          const key = presetFilename ? `progress:${presetFilename}` : null;
+          const key = presetFilename ? `progress:${userId}:${presetFilename}` : null;
           if (key) {
             const raw = localStorage.getItem(key);
             if (raw) {
@@ -117,14 +118,11 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
       }
 
       setActiveWords(merged);
-      // Load session XP for the detected mode (words/sentences) and then pick next
+      // Load XP from localStorage (persists across sessions)
       try {
-        // Prefer a preset-scoped session key when available (keeps XP per preset),
-        // otherwise fall back to the mode-based key (words / sentences).
-          const sessionKey = presetFilename ? `session_xp:${presetFilename}` : sessionKeyFor(isSentenceBatch ? 'sentences' : 'words');
-          // prefer preset-scoped + user if available
-          const keyToTry = presetFilename ? `session_xp:${userId}:${presetFilename}` : `session_xp:${userId}:${isSentenceBatch ? 'sentences' : 'words'}`;
-          const raw = sessionStorage.getItem(keyToTry) || sessionStorage.getItem(sessionKey);
+        // Use a single unified XP key per user to prevent confusion
+          const xpKey = `xp:${userId}`;
+          const raw = localStorage.getItem(xpKey);
         if (raw) {
           const parsed = JSON.parse(raw);
           if (typeof parsed.currentPoints === 'number') setCurrentPoints(parsed.currentPoints);
@@ -142,27 +140,26 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
     };
     initialise();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [words, presetFilename]);
+  }, [words, presetFilename, userId]);
 
-      // Persist XP to sessionStorage whenever it changes for the current mode
+      // Persist XP to localStorage whenever it changes (survives browser close)
       useEffect(() => {
         try {
           if (!loadedSessionRef.current) return;
           const payload = { currentPoints, streak, maxStreak };
-          // persist per-user preset key (if present) and per-user mode key
-          const userPresetKey = presetFilename ? `session_xp:${userId}:${presetFilename}` : null;
-          if (userPresetKey) sessionStorage.setItem(userPresetKey, JSON.stringify(payload));
-          sessionStorage.setItem(`session_xp:${userId}:${modeType}`, JSON.stringify(payload));
+          // Use a single unified XP key per user
+          const xpKey = `xp:${userId}`;
+          localStorage.setItem(xpKey, JSON.stringify(payload));
         } catch (e) {
           // ignore storage failures
         }
-      }, [currentPoints, streak, maxStreak, modeType]);
+      }, [currentPoints, streak, maxStreak, userId]);
 
   // Persist progress helper (per-preset in localStorage)
   const persistProgress = (list: WordPair[]) => {
     try {
       if (!presetFilename) return;
-      const key = `progress:${presetFilename}`;
+      const key = `progress:${userId}:${presetFilename}`;
       const map: Record<string, any> = {};
       list.forEach(w => {
         map[w.id] = { successCount: w.successCount || 0, lastPlayedTurn: w.lastPlayedTurn ?? null };
@@ -228,8 +225,13 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
   };
 
   // Helper to extract word and POS
+  // Function to render text (no special highlighting for blanks)
+  const renderTextWithHighlightedBlanks = (text: string) => {
+    return text;
+  };
+
   const parseWordDisplay = (text: string) => {
-    if (!text) return { word: '', pos: null };
+    if (!text) return { word: text, pos: null };
 
     // Move any internal '(s)' or '(S)' markers to the end of the string
     let suffix = '';
@@ -353,35 +355,27 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
     return out;
   };
 
-  // Translate each non-underscore segment individually and reassemble so underscores
-  // end up positioned according to the translated surrounding segments (better for RTL Hebrew).
+  // Translate the full sentence to Hebrew while preserving underscores
   const translateMaskedPreservePlace = async (masked: string) => {
-    const containsHebrew = (s: string) => /[\u0590-\u05FF]/.test(s);
-    const parts = masked.split(/(_+)/);
-    const outParts: string[] = [];
-    for (const part of parts) {
-      if (/^_+$/.test(part)) {
-        // keep underscores as-is
-        outParts.push(part);
-        continue;
+    // First, replace underscores with a placeholder that won't be translated
+    const placeholder = '___BLANK___';
+    const withPlaceholder = masked.replace(/_+/g, placeholder);
+    
+    try {
+      // Translate the entire sentence
+      const translated = await translateSentence(withPlaceholder);
+      if (translated) {
+        // Replace the placeholder back with underscores
+        return translated.replace(new RegExp(placeholder, 'g'), '___');
       }
-      // try server translate for the segment
-      try {
-        const t = await translateSentence(part);
-        if (t && containsHebrew(t)) {
-          outParts.push(t);
-          continue;
-        }
-      } catch (e) {
-        // fall through to local heuristic
-      }
-
-      // fallback: local heuristic translate for this segment
-      outParts.push(localTranslateSegment(part));
+    } catch (e) {
+      // Fallback to local translation
+      const localTranslated = localTranslateSegment(withPlaceholder);
+      return localTranslated.replace(new RegExp(placeholder, 'g'), '___');
     }
 
-    // Join the translated parts. We keep whitespace as produced by translations.
-    return outParts.join('');
+    // If all fails, return original with local translation attempt
+    return localTranslateSegment(withPlaceholder).replace(new RegExp(placeholder, 'g'), '___');
   };
 
   const safePlaySound = (type: 'success' | 'error' | 'pop') => {
@@ -407,7 +401,11 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
     e.preventDefault();
     if (!currentWord) return;
 
-    const quality = checkAnswerQuality(userAnswer, currentWord.hebrew);
+    // Use strict checking for Past Simple/Progressive exercises
+    const isPastExercise = String(currentWord.id).startsWith('past_');
+    const quality = isPastExercise 
+      ? checkAnswerQualityStrict(userAnswer, currentWord.hebrew)
+      : checkAnswerQuality(userAnswer, currentWord.hebrew);
     setFeedback(quality);
 
     const nextTurn = turnCount + 1;
@@ -436,7 +434,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
     if (quality === 'exact') {
       safePlaySound('success');
       setDotsFeedback('success');
-      const points = 2 + (streak > 2 ? 1 : 0); // Bonus for streak
+      const points = 10; // Fixed 10 points for correct answer
       setCurrentPoints(prev => prev + points);
       setStreak(prev => {
         const newStreak = prev + 1;
@@ -455,9 +453,9 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
     } else if (quality === 'close') {
       safePlaySound('pop');
       setDotsFeedback('neutral'); // Close isn't a "strike" on the mastery dots usually
-      setCurrentPoints(prev => prev + 1);
+      setCurrentPoints(prev => prev + 10);
       setStreak(0); 
-      addFloatingPoints(1);
+      addFloatingPoints(10);
       setTimeout(() => pickNextWord(updatedWords, nextTurn), 2500);
     } else {
       safePlaySound('error');
@@ -475,23 +473,37 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
 
         (async () => {
           try {
+            // Translate the filled sentence
             const t = await translateSentence(filled);
             setRevealedTranslation(t || '');
+            
+            // Also translate just the word if it's from a sentence bank
+            // Check if the word is in English (not Hebrew) by checking if it contains Latin characters
+            if (correct && /[a-zA-Z]/.test(correct)) {
+              try {
+                const wordTranslation = await translateSentence(correct);
+                if (wordTranslation) {
+                  setRevealedTranslation(`${wordTranslation} - ${t || ''}`);
+                }
+              } catch (e) {
+                // Keep the sentence translation if word translation fails
+              }
+            }
           } catch (e) {
             setRevealedTranslation('לא ניתן לתרגם כרגע');
           } finally {
             setLoadingReveal(false);
-            // Wait one second for the student to see the revealed filled sentence, then continue
+            // Wait 3 seconds for the student to see the revealed filled sentence and translation, then continue
             setTimeout(() => {
               // Persist state and pick next
               persistProgress(updatedWords);
               pickNextWord(updatedWords, nextTurn);
-            }, 1000);
+            }, 3000);
           }
         })();
       } else {
-        // non-sentence wrong answer: show the correct answer a bit longer so student can see it
-        setTimeout(() => pickNextWord(updatedWords, nextTurn), 4000);
+        // non-sentence wrong answer: show the correct answer longer so student can see it - 6 seconds
+        setTimeout(() => pickNextWord(updatedWords, nextTurn), 6000);
       }
     }
   };
@@ -507,6 +519,12 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
   // Detect whether the current word is a sentence-fill exercise.
   const isSentenceMode = Boolean(currentWord && (currentWord.english.includes('_') || (currentWord.id && String(currentWord.id).startsWith('s'))));
 
+  // Detect if there are multiple blanks (past simple/progressive exercises)
+  const hasMultipleBlanks = isSentenceMode && currentWord && (currentWord.english.match(/_+/g) || []).length > 1;
+  
+  // Detect if this is a Past Simple/Progressive exercise (requires strict checking)
+  const isPastTenseExercise = currentWord && String(currentWord.id).startsWith('past_');
+
   // Build the sentence bank only when in sentence mode
   let sentenceBank: string[] = [];
   if (isSentenceMode && currentWord && currentWord.id && currentWord.id.includes('-')) {
@@ -518,11 +536,11 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
   }
 
   return (
-    <div className="max-w-2xl w-full mx-auto px-4">
+    <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
       {/* Top Bar: User & Score */}
-      <div className="flex items-center justify-between bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-lg p-3 mb-6 border border-slate-600 relative overflow-hidden neon-border">
-        <div className="flex items-center gap-3 z-10">
-            <div className="w-12 h-12 rounded-full bg-slate-700 border border-slate-500 flex items-center justify-center text-2xl shadow-inner flex-shrink-0 overflow-hidden">
+      <div className="flex items-center justify-between bg-slate-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg p-2 sm:p-3 mb-4 sm:mb-6 border border-slate-600 relative overflow-hidden neon-border">
+        <div className="flex items-center gap-2 sm:gap-3 z-10">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-700 border border-slate-500 flex items-center justify-center text-xl sm:text-2xl shadow-inner flex-shrink-0 overflow-hidden">
             {user.avatar ? (
               <img src={`/avatars/${user.avatar}`} alt={`${user.name} avatar`} className={`avatar-img ${avatarPosClass}`} />
             ) : (
@@ -537,11 +555,24 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
           </div>
         </div>
         
-        <div className="flex items-center gap-3">
-          {/* Back button to return to input selection */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Two back buttons - one for settings, one for practice selection */}
           <div className="relative z-10">
-            <BackButton onClick={() => onBack?.()} small>
-              חזור
+            <BackButton onClick={() => {
+              // Save progress before going back
+              persistProgress(activeWords);
+              onBackToSettings?.();
+            }} small>
+              הגדרות
+            </BackButton>
+          </div>
+          <div className="relative z-10">
+            <BackButton onClick={() => {
+              // Save progress before going back
+              persistProgress(activeWords);
+              onBack?.();
+            }} small>
+              תרגולים
             </BackButton>
           </div>
             {/* Share button removed for classroom-only mode */}
@@ -604,7 +635,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             <div className="w-full px-2 z-10">
               {sentenceBank.length > 0 && (
                 <div className="mb-3 w-full">
-                  <div className="text-sm font-black tracking-wide mb-2 sentence-bank-header">מחסן מילים</div>
+                  <div className="text-lg md:text-xl font-black tracking-wide mb-2 sentence-bank-header text-cyan-300">מחסן מילים</div>
                   <div className="flex flex-wrap gap-2">
                     {sentenceBank.map((w, idx) => (
                       <span key={idx} className="inline-block bg-slate-900/70 text-white px-3 py-1 rounded-full text-xs font-bold">{w}</span>
@@ -613,7 +644,9 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                 </div>
               )}
               <h2 className={`${isSentenceMode ? 'text-2xl md:text-4xl' : 'text-3xl md:text-5xl'} font-black text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)] tracking-wide break-words whitespace-normal leading-tight mb-2 flex items-center justify-center gap-3`}>
-                <span dir="ltr" className="text-left">{parsedWord.word}</span>
+                <span dir="ltr" className="text-left">
+                  {isSentenceMode ? renderTextWithHighlightedBlanks(parsedWord.word) : parsedWord.word}
+                </span>
                 {currentWord && currentWord.successCount >= REQUIRED_WINS && (
                   <span className="inline-flex items-center gap-2 bg-green-700/20 border border-green-500 text-green-200 text-sm font-bold px-3 py-1 rounded-full">
                     ✅ <span>מוכר</span>
@@ -686,38 +719,148 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             ))}
 
             <form onSubmit={checkAnswer} className="space-y-6 max-w-md mx-auto relative">
-              <div className="relative">
-                <label className="block text-center text-sm font-bold text-slate-400 mb-2 uppercase tracking-widest">{isSentenceMode ? 'השלימו את המילה החסרה' : 'תרגום לעברית'}</label>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={userAnswer}
-                  onChange={(e) => setUserAnswer(e.target.value)}
-                  disabled={feedback !== 'none'}
-                  autoComplete="off"
-                  className={`w-full text-center text-xl md:text-2xl font-bold p-5 rounded-2xl border-2 outline-none transition-all shadow-inner placeholder-slate-600 ${
-                    feedback === 'wrong' 
-                      ? 'border-red-500 bg-red-900/20 text-red-200 animate-shake' 
-                      : feedback === 'exact' 
-                        ? 'border-green-500 bg-green-900/20 text-green-200 ring-2 ring-green-500/50'
-                        : feedback === 'close'
-                          ? 'border-yellow-500 bg-yellow-900/20 text-yellow-200' 
-                          : 'border-slate-600 bg-slate-900 text-cyan-300 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/20'
-                  }`}
-                  placeholder={isSentenceMode ? 'הקלד את המילה החסרה' : 'הקלד את התרגום'}
-                />
-              </div>
+              {/* Multiple Choice Mode */}
+              {currentWord.options && currentWord.options.length > 0 ? (
+                <div className="relative">
+                  <label className="block text-center text-sm font-bold text-slate-400 mb-4 uppercase tracking-widest">בחר את התשובה הנכונה</label>
+                  <div className="space-y-3">
+                    {currentWord.options.map((option, index) => {
+                      const isCorrect = currentWord.correctIndex === index;
+                      const isSelected = userAnswer === option;
+                      
+                      return (
+                        <button
+                          key={index}
+                          type="button"
+                          onClick={() => {
+                            if (feedback !== 'none') return; // Already answered
+                            
+                            setUserAnswer(option);
+                            
+                            // Check if correct and process
+                            setTimeout(() => {
+                              const nextTurn = turnCount + 1;
+                              setTurnCount(nextTurn);
+                              
+                              if (isCorrect) {
+                                // Correct answer
+                                setFeedback('exact');
+                                safePlaySound('success');
+                                setDotsFeedback('success');
+                                const points = 10;
+                                setCurrentPoints(prev => prev + points);
+                                setStreak(prev => {
+                                  const newStreak = prev + 1;
+                                  if (newStreak > maxStreak) setMaxStreak(newStreak);
+                                  return newStreak;
+                                });
+                                addFloatingPoints(points);
+                                createConfetti();
+                                
+                                // Update word progress
+                                const updatedWords = activeWords.map(w => 
+                                  w.id === currentWord.id 
+                                    ? { ...w, successCount: REQUIRED_WINS, lastPlayedTurn: nextTurn }
+                                    : w
+                                );
+                                setActiveWords(updatedWords);
+                                persistProgress(updatedWords);
+                                
+                                setTimeout(() => pickNextWord(updatedWords, nextTurn), 2500);
+                              } else {
+                                // Wrong answer
+                                setFeedback('wrong');
+                                safePlaySound('error');
+                                setDotsFeedback('error');
+                                setStreak(0);
+                                
+                                const updatedWords = activeWords.map(w => 
+                                  w.id === currentWord.id 
+                                    ? { ...w, lastPlayedTurn: nextTurn }
+                                    : w
+                                );
+                                setActiveWords(updatedWords);
+                                persistProgress(updatedWords);
+                                
+                                // Extended delay for wrong answers in multiple choice (Past Tense) - 8 seconds to read explanation
+                                setTimeout(() => pickNextWord(updatedWords, nextTurn), 8000);
+                              }
+                            }, 100);
+                          }}
+                          disabled={feedback !== 'none'}
+                          className={`w-full text-right text-lg font-bold p-4 rounded-xl border-2 transition-all ${
+                            feedback === 'exact' && isSelected
+                              ? 'border-green-500 bg-green-900/30 text-green-200 ring-2 ring-green-500/50'
+                              : feedback === 'wrong' && isSelected
+                                ? 'border-red-500 bg-red-900/30 text-red-200'
+                                : feedback !== 'none' && isCorrect
+                                  ? 'border-green-500 bg-green-900/20 text-green-300'
+                                  : 'border-slate-600 bg-slate-900 text-slate-200 hover:border-cyan-500 hover:bg-slate-800'
+                          }`}
+                        >
+                          {String.fromCharCode(65 + index)}. {option}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                /* Text Input Mode (original) */
+                <div className="relative">
+                  <label className={`block text-center text-sm font-bold mb-2 uppercase tracking-widest ${
+                    isSentenceMode 
+                      ? 'text-cyan-300 bg-cyan-900/20 py-2 rounded-lg border border-cyan-700/30' 
+                      : 'text-slate-400'
+                  }`}>
+                    {hasMultipleBlanks ? 'השלימו את המילים החסרות (עם פסיק ביניהן)' : isSentenceMode ? 'השלימו את המילה החסרה' : 'תרגום לעברית'}
+                  </label>
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={userAnswer}
+                    onChange={(e) => setUserAnswer(e.target.value)}
+                    disabled={feedback !== 'none'}
+                    autoComplete="off"
+                    className={`w-full text-center text-xl md:text-2xl font-bold p-5 rounded-2xl border-2 outline-none transition-all shadow-inner placeholder-slate-600 ${
+                      feedback === 'wrong' 
+                        ? 'border-red-500 bg-red-900/20 text-red-200 animate-shake' 
+                        : feedback === 'exact' 
+                          ? 'border-green-500 bg-green-900/20 text-green-200 ring-2 ring-green-500/50'
+                          : feedback === 'close'
+                            ? 'border-yellow-500 bg-yellow-900/20 text-yellow-200' 
+                            : 'border-slate-600 bg-slate-900 text-cyan-300 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/20'
+                    }`}
+                    placeholder={hasMultipleBlanks ? 'walked, ate' : isSentenceMode ? 'הקלד את המילה החסרה' : 'הקלד את התרגום'}
+                  />
+                </div>
+              )}
 
               {/* Feedback States */}
               <div className="min-h-[80px] flex items-center justify-center">
                 {feedback === 'wrong' && (
                   <div className="text-center animate-pop-in">
                     <div className="text-4xl mb-1">❌</div>
-                    <p className="text-red-400 font-bold text-lg">אופס! התשובה היא:</p>
-                    <p className="text-xl font-black text-white">{currentWord.hebrew}</p>
-                    {isSentenceMode && revealedTranslation && (
+                    <p className="text-red-400 font-bold text-lg">אופס! התשובה הנכונה היא:</p>
+                    <p className="text-xl font-black text-white">
+                      {currentWord.options && currentWord.correctIndex !== undefined 
+                        ? currentWord.options[currentWord.correctIndex]
+                        : currentWord.hebrew}
+                    </p>
+                    {currentWord.explanation && (
+                      <div className="mt-3 p-3 bg-red-900/20 rounded-lg text-sm text-slate-100 border border-red-700" dir="rtl">
+                        <p className="text-red-300 font-bold mb-1">הסבר:</p>
+                        <div className="whitespace-normal break-words hebrew-text">{currentWord.explanation}</div>
+                      </div>
+                    )}
+                    {isSentenceMode && revealedTranslation && !currentWord.options && (
                       <div className="mt-3 p-3 bg-slate-900/70 rounded-lg text-sm text-slate-100 border border-slate-700" dir="rtl">
+                        <p className="text-cyan-300 font-bold mb-1">תרגום:</p>
                         <div className="whitespace-normal break-words hebrew-text">{revealedTranslation}</div>
+                      </div>
+                    )}
+                    {loadingReveal && isSentenceMode && !currentWord.options && (
+                      <div className="mt-3 p-3 bg-slate-900/70 rounded-lg text-sm text-slate-100 border border-slate-700" dir="rtl">
+                        <div className="text-cyan-300">מתרגם...</div>
                       </div>
                     )}
                   </div>
@@ -735,19 +878,28 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                   <div className="text-center animate-pop-in">
                     <div className="text-5xl mb-1 drop-shadow-lg">✨</div>
                     <p className="text-green-400 font-black text-3xl tracking-tight text-shadow-glow">מצוין!</p>
+                    {currentWord.explanation && (
+                      <div className="mt-3 p-3 bg-green-900/20 rounded-lg text-sm text-slate-100 border border-green-700" dir="rtl">
+                        <p className="text-green-300 font-bold mb-1">הסבר:</p>
+                        <div className="whitespace-normal break-words hebrew-text">{currentWord.explanation}</div>
+                      </div>
+                    )}
                   </div>
                 )}
 
                 {feedback === 'none' && (
                   <div className="w-full flex flex-col gap-3">
-                    <button
-                      type="submit"
-                      disabled={!userAnswer.trim()}
-                      className="w-full btn-3d bg-fuchsia-700 hover:bg-fuchsia-600 text-white py-4 rounded-xl font-black text-xl shadow-lg border-b-4 border-fuchsia-900 disabled:opacity-50 disabled:shadow-none disabled:transform-none disabled:border-b-0"
-                    >
-                      בדיקה
-                    </button>
-                    {showHint && isSentenceMode && (
+                    {/* Hide submit button for multiple choice (auto-submits) */}
+                    {!currentWord.options && (
+                      <button
+                        type="submit"
+                        disabled={!userAnswer.trim()}
+                        className="w-full btn-3d bg-fuchsia-700 hover:bg-fuchsia-600 text-white py-4 rounded-xl font-black text-xl shadow-lg border-b-4 border-fuchsia-900 disabled:opacity-50 disabled:shadow-none disabled:transform-none disabled:border-b-0"
+                      >
+                        בדיקה
+                      </button>
+                    )}
+                    {showHint && (isSentenceMode || currentWord.options) && (
                       <div className="mt-3 p-3 bg-slate-900/60 rounded-lg text-sm text-slate-100 border border-slate-700" dir="rtl">
                         {hintTranslation ? (
                           <div className="whitespace-normal break-words hebrew-text">{hintTranslation}</div>
@@ -765,31 +917,23 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                     <button
                       type="button"
                       onClick={async () => {
-                        if (isSentenceMode && currentWord) {
+                        if ((isSentenceMode || currentWord.options) && currentWord) {
                           setLoadingHint(true);
-                          const masked = currentWord.english;
-                          const containsHebrew = (s: string) => /[\u0590-\u05FF]/.test(s);
+                          const textToTranslate = currentWord.english;
                           try {
-                            // First, try translating the whole sentence (preserve underscores via server)
-                            let fullTranslated: string | null = null;
-                            try {
-                              const t = await translateSentence(masked);
-                              if (t && containsHebrew(t)) fullTranslated = t;
-                            } catch (e) {
-                              fullTranslated = null;
-                            }
-
-                            if (fullTranslated) {
-                              setHintTranslation(fullTranslated);
+                            // For multiple choice, translate the whole question
+                            // For sentence mode, translate but keep underscores in place
+                            let translatedText;
+                            if (currentWord.options) {
+                              // Multiple choice - translate entire question
+                              translatedText = await translateSentence(textToTranslate);
                             } else {
-                              // Fallback: segmented translate to preserve underscore placement
-                              try {
-                                const seg = await translateMaskedPreservePlace(masked);
-                                setHintTranslation(seg);
-                              } catch (e) {
-                                setHintTranslation(localTranslateSegment(masked));
-                              }
+                              // Sentence mode - preserve underscores
+                              translatedText = await translateMaskedPreservePlace(textToTranslate);
                             }
+                            setHintTranslation(translatedText || localTranslateSegment(textToTranslate));
+                          } catch (e) {
+                            setHintTranslation(localTranslateSegment(textToTranslate));
                           } finally {
                             setLoadingHint(false);
                             setShowHint(true);
@@ -800,7 +944,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                       }}
                       className="text-sm font-medium text-slate-500 hover:text-cyan-400 transition-colors py-2"
                     >
-                      {isSentenceMode ? (loadingHint ? 'מטעין רמז...' : (showHint ? 'הסתר רמז' : 'צריך רמז? 💡')) : (showHint ? `אות ראשונה: ${currentWord.hebrew.charAt(0)}` : 'צריך רמז? 💡')}
+                      {(isSentenceMode || currentWord.options) ? (loadingHint ? 'מטעין רמז...' : (showHint ? 'הסתר רמז' : 'צריך רמז? 💡')) : (showHint ? `אות ראשונה: ${currentWord.hebrew.charAt(0)}` : 'צריך רמז? 💡')}
                     </button>
                   </div>
                 )}

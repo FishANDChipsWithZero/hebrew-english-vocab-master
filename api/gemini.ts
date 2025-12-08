@@ -93,6 +93,17 @@ export default async function handler(request: any, response: any) {
         },
       });
       resultData = JSON.parse(geminiResponse.text || "[]");
+    } else if (type === 'translate') {
+      // Translate English sentence to Hebrew
+      const geminiResponse = await ai.models.generateContent({
+        model: MODEL_NAME,
+        contents: `Translate the following English sentence to Hebrew. Return ONLY the Hebrew translation, nothing else.
+
+Sentence: ${content}`,
+      });
+      
+      const translation = geminiResponse.text?.trim() || '';
+      return response.status(200).json({ translation });
     } else {
       return response.status(400).json({ error: 'Invalid type' });
     }
