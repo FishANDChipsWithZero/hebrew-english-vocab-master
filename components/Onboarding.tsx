@@ -59,32 +59,32 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         <div className="absolute -bottom-28 -left-36 w-28 h-28 bg-cyan-700 rounded-full blur-[60px] opacity-18 pointer-events-none -z-10"></div>
 
         <div className="relative z-10">
-          <div className="text-center mb-6 sm:mb-8">
-            <h1 className="text-xl sm:text-2xl font-bold text-slate-300 mb-2">
+          <div className="text-center mb-4 sm:mb-6">
+            <h1 className="text-lg sm:text-xl font-bold text-slate-300 mb-2">
               👋 היי, {googleUser?.name || 'משתמש'}
             </h1>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-bold text-slate-300 mb-2">שם משתמש:</label>
+              <label className="block text-xs sm:text-sm font-bold text-slate-300 mb-1.5">שם משתמש:</label>
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-5 py-4 rounded-xl border border-slate-600 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all outline-none font-bold text-lg bg-slate-900/50 text-white placeholder-slate-600"
+                className="w-full px-4 py-3 rounded-xl border border-slate-600 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all outline-none font-bold text-base bg-slate-900/50 text-white placeholder-slate-600"
                 placeholder="איך לקרוא לך?"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-slate-300 mb-3">מגדר:</label>
-              <div className="flex gap-3 justify-center">
+              <label className="block text-xs sm:text-sm font-bold text-slate-300 mb-2">מגדר:</label>
+              <div className="flex gap-2 justify-center">
                 <button
                   type="button"
                   onClick={() => setGender('male')}
-                  className={`flex-1 py-3 px-4 rounded-xl font-bold transition-all ${
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'male'
                       ? 'bg-cyan-600 text-white ring-2 ring-cyan-400'
                       : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-cyan-500'
@@ -95,7 +95,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                 <button
                   type="button"
                   onClick={() => setGender('female')}
-                  className={`flex-1 py-3 px-4 rounded-xl font-bold transition-all ${
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'female'
                       ? 'bg-cyan-600 text-white ring-2 ring-cyan-400'
                       : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-cyan-500'
@@ -106,7 +106,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                 <button
                   type="button"
                   onClick={() => setGender('other')}
-                  className={`flex-1 py-3 px-4 rounded-xl font-bold transition-all ${
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'other'
                       ? 'bg-cyan-600 text-white ring-2 ring-cyan-400'
                       : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-cyan-500'
@@ -117,12 +117,12 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
               </div>
             </div>
 
-            {/* Avatar gallery - improved visual tiles */}
+            {/* Avatar gallery - smaller for mobile */}
             <div>
-              <label className="block text-sm font-bold text-slate-300 mb-3">
+              <label className="block text-xs sm:text-sm font-bold text-slate-300 mb-2">
                 {getGenderedText({ gender } as User, 'בחר אווטאר', 'בחרי אווטאר', 'בחר/י אווטאר')}
               </label>
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-3">
                 {avatars.map((a) => {
                   const isSelected = selectedAvatar === a.filename;
                   const posClass = a.posClass ? a.posClass : 'avatar-pos-35';
@@ -158,7 +158,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             <button
               type="submit"
               disabled={!name.trim()}
-              className="w-full btn-3d bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-black py-4 px-6 rounded-xl text-xl shadow-lg mt-4 disabled:opacity-50 disabled:cursor-not-allowed border-b-4 border-slate-900"
+              className="w-full btn-3d bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-black py-3 px-5 rounded-xl text-base sm:text-lg shadow-lg mt-3 disabled:opacity-50 disabled:cursor-not-allowed border-b-4 border-slate-900"
             >
               {getGenderedText({ gender } as User, '🚀 בוא נתחיל!', '🚀 בואי נתחיל!', '🚀 בוא/י נתחיל!')}
             </button>

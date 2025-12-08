@@ -626,7 +626,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
         <div className="bg-slate-800 rounded-[2rem] shadow-2xl overflow-hidden border border-slate-600 transform transition-transform hover:scale-[1.01] neon-border">
           
           {/* Card Header / Word Display */}
-          <div className="bg-slate-900 p-6 md:p-8 text-center relative overflow-hidden min-h-[220px] flex flex-col justify-center items-center group">
+          <div className="bg-slate-900 p-4 md:p-6 text-center relative overflow-hidden min-h-[180px] flex flex-col justify-center items-center group">
             
             {/* Background Decoration */}
             <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900 via-slate-950 to-slate-950"></div>
@@ -634,16 +634,16 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             {/* Word - Adjusted with break-words and responsive text sizing */}
             <div className="w-full px-2 z-10">
               {sentenceBank.length > 0 && (
-                <div className="mb-3 w-full">
-                  <div className="text-lg md:text-xl font-black tracking-wide mb-2 sentence-bank-header text-cyan-300">מחסן מילים</div>
-                  <div className="flex flex-wrap gap-2">
+                <div className="mb-2 w-full">
+                  <div className="text-sm sm:text-base md:text-lg font-black tracking-wide mb-1.5 sentence-bank-header text-cyan-300">מחסן מילים</div>
+                  <div className="flex flex-wrap gap-1.5">
                     {sentenceBank.map((w, idx) => (
-                      <span key={idx} className="inline-block bg-slate-900/70 text-white px-3 py-1 rounded-full text-xs font-bold">{w}</span>
+                      <span key={idx} className="inline-block bg-slate-900/70 text-white px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold">{w}</span>
                     ))}
                   </div>
                 </div>
               )}
-              <h2 className={`${isSentenceMode ? 'text-2xl md:text-4xl' : 'text-3xl md:text-5xl'} font-black text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)] tracking-wide break-words whitespace-normal leading-tight mb-2 flex items-center justify-center gap-3`}>
+              <h2 className={`${isSentenceMode ? 'text-xl sm:text-2xl md:text-3xl' : 'text-2xl sm:text-3xl md:text-4xl'} font-black text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)] tracking-wide break-words whitespace-normal leading-tight mb-2 flex items-center justify-center gap-2`}>
                 <span dir="ltr" className="text-left">
                   {isSentenceMode ? renderTextWithHighlightedBlanks(parsedWord.word) : parsedWord.word}
                 </span>
@@ -655,8 +655,8 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
               </h2>
               {/* Distinct Part of Speech Badge */}
               {parsedWord.pos && (
-                <div className="mb-4">
-                  <span className="inline-block bg-fuchsia-900/50 border border-fuchsia-500 text-fuchsia-300 px-3 py-1 rounded-full text-xs md:text-sm font-bold tracking-widest uppercase shadow-[0_0_10px_rgba(217,70,239,0.3)] neon-text-glow">
+                <div className="mb-2">
+                  <span className="inline-block bg-fuchsia-900/50 border border-fuchsia-500 text-fuchsia-300 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase shadow-[0_0_10px_rgba(217,70,239,0.3)] neon-text-glow">
                     {parsedWord.pos}
                   </span>
                 </div>
@@ -666,9 +666,9 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             <button 
               onClick={playAudio}
               type="button"
-              className="relative z-10 btn-3d bg-cyan-700 hover:bg-cyan-600 text-white border-b-4 border-cyan-900 rounded-xl px-4 py-2 flex items-center gap-2 font-bold text-sm transition-all active:border-b-0 active:translate-y-1 shadow-lg mt-2"
+              className="relative z-10 btn-3d bg-cyan-700 hover:bg-cyan-600 text-white border-b-4 border-cyan-900 rounded-xl px-3 py-1.5 flex items-center gap-1.5 font-bold text-xs sm:text-sm transition-all active:border-b-0 active:translate-y-1 shadow-lg mt-1"
             >
-              <span>🔊</span> שמע הגייה
+              <span className="text-sm">🔊</span> שמע הגייה
             </button>
 
             {/* Neon Mastery Dots */}
@@ -705,7 +705,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
           </div>
 
           {/* Interaction Area */}
-          <div className="p-6 md:p-8 bg-slate-800 relative">
+          <div className="p-4 md:p-6 bg-slate-800 relative">
             
             {/* Floating Points Animation Container */}
             {floatingPoints.map(fp => (
@@ -718,11 +718,11 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
               </div>
             ))}
 
-            <form onSubmit={checkAnswer} className="space-y-6 max-w-md mx-auto relative">
+            <form onSubmit={checkAnswer} className="space-y-4 max-w-md mx-auto relative">
               {/* Multiple Choice Mode */}
               {currentWord.options && currentWord.options.length > 0 ? (
                 <div className="relative">
-                  <label className="block text-center text-sm font-bold text-slate-400 mb-4 uppercase tracking-widest">בחר את התשובה הנכונה</label>
+                  <label className="block text-center text-xs sm:text-sm font-bold text-slate-400 mb-3 uppercase tracking-wider">בחר את התשובה הנכונה</label>
                   <div className="space-y-3">
                     {currentWord.options.map((option, index) => {
                       const isCorrect = currentWord.correctIndex === index;
@@ -788,7 +788,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                             }, 100);
                           }}
                           disabled={feedback !== 'none'}
-                          className={`w-full text-right text-lg font-bold p-4 rounded-xl border-2 transition-all ${
+                          className={`w-full text-right text-sm sm:text-base font-bold p-3 rounded-xl border-2 transition-all ${
                             feedback === 'exact' && isSelected
                               ? 'border-green-500 bg-green-900/30 text-green-200 ring-2 ring-green-500/50'
                               : feedback === 'wrong' && isSelected
@@ -807,7 +807,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
               ) : (
                 /* Text Input Mode (original) */
                 <div className="relative">
-                  <label className={`block text-center text-sm font-bold mb-2 uppercase tracking-widest ${
+                  <label className={`block text-center text-xs sm:text-sm font-bold mb-2 uppercase tracking-wider ${
                     isSentenceMode 
                       ? 'text-cyan-300 bg-cyan-900/20 py-2 rounded-lg border border-cyan-700/30' 
                       : 'text-slate-400'
@@ -821,7 +821,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                     onChange={(e) => setUserAnswer(e.target.value)}
                     disabled={feedback !== 'none'}
                     autoComplete="off"
-                    className={`w-full text-center text-xl md:text-2xl font-bold p-5 rounded-2xl border-2 outline-none transition-all shadow-inner placeholder-slate-600 ${
+                    className={`w-full text-center text-base sm:text-xl font-bold p-4 rounded-2xl border-2 outline-none transition-all shadow-inner placeholder-slate-600 ${
                       feedback === 'wrong' 
                         ? 'border-red-500 bg-red-900/20 text-red-200 animate-shake' 
                         : feedback === 'exact' 
@@ -836,18 +836,18 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
               )}
 
               {/* Feedback States */}
-              <div className="min-h-[80px] flex items-center justify-center">
+              <div className="min-h-[60px] flex items-center justify-center">
                 {feedback === 'wrong' && (
                   <div className="text-center animate-pop-in">
-                    <div className="text-4xl mb-1">❌</div>
-                    <p className="text-red-400 font-bold text-lg">אופס! התשובה הנכונה היא:</p>
-                    <p className="text-xl font-black text-white">
+                    <div className="text-3xl mb-1">❌</div>
+                    <p className="text-red-400 font-bold text-sm sm:text-base">אופס! התשובה הנכונה היא:</p>
+                    <p className="text-base sm:text-lg font-black text-white">
                       {currentWord.options && currentWord.correctIndex !== undefined 
                         ? currentWord.options[currentWord.correctIndex]
                         : currentWord.hebrew}
                     </p>
                     {currentWord.explanation && (
-                      <div className="mt-3 p-3 bg-red-900/20 rounded-lg text-sm text-slate-100 border border-red-700" dir="rtl">
+                      <div className="mt-2 p-2 bg-red-900/20 rounded-lg text-xs sm:text-sm text-slate-100 border border-red-700" dir="rtl">
                         <p className="text-red-300 font-bold mb-1">הסבר:</p>
                         <div className="whitespace-normal break-words hebrew-text">{currentWord.explanation}</div>
                       </div>
@@ -868,16 +868,16 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
 
                 {feedback === 'close' && (
                   <div className="text-center animate-pop-in">
-                    <div className="text-4xl mb-1">⚠️</div>
-                    <p className="text-yellow-400 font-bold text-lg">קרוב! (1 נקודה)</p>
+                    <div className="text-3xl mb-1">⚠️</div>
+                    <p className="text-yellow-400 font-bold text-sm sm:text-base">קרוב! (1 נקודה)</p>
                     <p className="text-slate-400">הכתיב המדויק: <span className="font-black text-white">{currentWord.hebrew}</span></p>
                   </div>
                 )}
 
                 {feedback === 'exact' && (
                   <div className="text-center animate-pop-in">
-                    <div className="text-5xl mb-1 drop-shadow-lg">✨</div>
-                    <p className="text-green-400 font-black text-3xl tracking-tight text-shadow-glow">מצוין!</p>
+                    <div className="text-4xl mb-1 drop-shadow-lg">✨</div>
+                    <p className="text-green-400 font-black text-xl sm:text-2xl tracking-tight text-shadow-glow">מצוין!</p>
                     {currentWord.explanation && (
                       <div className="mt-3 p-3 bg-green-900/20 rounded-lg text-sm text-slate-100 border border-green-700" dir="rtl">
                         <p className="text-green-300 font-bold mb-1">הסבר:</p>
@@ -894,7 +894,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                       <button
                         type="submit"
                         disabled={!userAnswer.trim()}
-                        className="w-full btn-3d bg-fuchsia-700 hover:bg-fuchsia-600 text-white py-4 rounded-xl font-black text-xl shadow-lg border-b-4 border-fuchsia-900 disabled:opacity-50 disabled:shadow-none disabled:transform-none disabled:border-b-0"
+                        className="w-full btn-3d bg-fuchsia-700 hover:bg-fuchsia-600 text-white py-3 rounded-xl font-black text-base sm:text-lg shadow-lg border-b-4 border-fuchsia-900 disabled:opacity-50 disabled:shadow-none disabled:transform-none disabled:border-b-0"
                       >
                         בדיקה
                       </button>
