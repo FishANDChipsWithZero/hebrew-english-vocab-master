@@ -137,11 +137,28 @@ const App: React.FC = () => {
         )}
 
         {step === AppStep.INPUT_SELECTION && (
-          <InputSelection user={user} onWordsReady={handleWordsReady} setLoading={setLoading} presetFilename={presetFilename} autoLoadOnMount={autoLoadOnMount} onBack={() => setStep(AppStep.ONBOARDING)} />
+          <InputSelection 
+            user={user} 
+            onWordsReady={handleWordsReady} 
+            setLoading={setLoading} 
+            presetFilename={presetFilename} 
+            autoLoadOnMount={autoLoadOnMount} 
+            onBack={() => setStep(AppStep.ONBOARDING)}
+            onResume={() => {
+              // If we already have words and preset, just resume the game
+              if (words.length > 0 && presetFilename) {
+                setStep(AppStep.GAME);
+              }
+            }}
+          />
         )}
 
         {step === AppStep.GAME && user && (
-          <Game words={words} user={user} presetFilename={presetFilename} onFinish={handleGameFinish} onBack={() => setStep(AppStep.INPUT_SELECTION)} onBackToSettings={() => setStep(AppStep.ONBOARDING)} />
+          <Game words={words} user={user} presetFilename={presetFilename} onFinish={handleGameFinish} onBack={() => {
+            // When going back to practice selection, keep the words and preset so we can resume
+            // Don't reset anything - just change the step
+            setStep(AppStep.INPUT_SELECTION);
+          }} onBackToSettings={() => setStep(AppStep.ONBOARDING)} />
         )}
 
         {step === AppStep.PAST_TENSE_LEARN && (

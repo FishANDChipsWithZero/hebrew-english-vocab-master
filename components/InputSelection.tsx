@@ -14,9 +14,10 @@ interface InputSelectionProps {
   // when true the component will auto-load the preset on mount; otherwise it will only show the UI
   autoLoadOnMount?: boolean;
   onBack?: () => void;
+  onResume?: () => void;
 }
 
-const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, setLoading, presetFilename, autoLoadOnMount = false, onBack }) => {
+const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, setLoading, presetFilename, autoLoadOnMount = false, onBack, onResume }) => {
   const [activeTab, setActiveTab] = useState<'text' | 'image'>('text');
   const [textInput, setTextInput] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -116,6 +117,21 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
           </div>
         )}
       </div>
+
+      {/* Resume button - shows if there's an active preset */}
+      {presetFilename && onResume && (
+        <div className="mb-6 text-center">
+          <button
+            onClick={onResume}
+            className="btn-3d bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-extrabold py-4 px-10 rounded-3xl shadow-2xl text-xl transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none animate-pulse-slow"
+          >
+            <span className="inline-block mr-2">▶️</span>
+            <span className="align-middle">המשך תרגול</span>
+            <div className="text-xs mt-1 opacity-80">ההתקדמות שלך נשמרה</div>
+          </button>
+        </div>
+      )}
+
       {/* Classroom preset - only Unit 2 button (students cannot add words) */}
       <div className="mb-6 flex gap-3 justify-center">
         <button
