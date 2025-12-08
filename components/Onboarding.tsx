@@ -55,8 +55,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
       <div className="bg-slate-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-slate-700 relative overflow-hidden neon-border">
         
         {/* Decorative background blobs (moved/toned down to avoid overlapping avatars) */}
-        <div className="absolute -top-28 -right-36 w-28 h-28 bg-purple-700 rounded-full blur-[60px] opacity-20 pointer-events-none -z-10"></div>
-        <div className="absolute -bottom-28 -left-36 w-28 h-28 bg-cyan-700 rounded-full blur-[60px] opacity-18 pointer-events-none -z-10"></div>
+        <div className="absolute -top-28 -right-36 w-28 h-28 bg-yellow-700 rounded-full blur-[60px] opacity-20 pointer-events-none -z-10"></div>
+        <div className="absolute -bottom-28 -left-36 w-28 h-28 bg-yellow-700 rounded-full blur-[60px] opacity-18 pointer-events-none -z-10"></div>
 
         <div className="relative z-10">
           <div className="text-center mb-4 sm:mb-6">
@@ -73,7 +73,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-slate-600 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all outline-none font-bold text-base bg-slate-900/50 text-white placeholder-slate-600"
+                className="w-full px-4 py-3 rounded-xl border border-slate-600 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all outline-none font-bold text-base bg-slate-900/50 text-white placeholder-slate-600"
                 placeholder="איך לקרוא לך?"
               />
             </div>
@@ -86,8 +86,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   onClick={() => setGender('male')}
                   className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'male'
-                      ? 'bg-cyan-600 text-white ring-2 ring-cyan-400'
-                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-cyan-500'
+                      ? 'bg-yellow-600 text-slate-900 ring-2 ring-yellow-400'
+                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-yellow-500'
                   }`}
                 >
                   זכר
@@ -97,8 +97,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   onClick={() => setGender('female')}
                   className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'female'
-                      ? 'bg-cyan-600 text-white ring-2 ring-cyan-400'
-                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-cyan-500'
+                      ? 'bg-yellow-600 text-slate-900 ring-2 ring-yellow-400'
+                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-yellow-500'
                   }`}
                 >
                   נקבה
@@ -108,8 +108,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   onClick={() => setGender('other')}
                   className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'other'
-                      ? 'bg-cyan-600 text-white ring-2 ring-cyan-400'
-                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-cyan-500'
+                      ? 'bg-yellow-600 text-slate-900 ring-2 ring-yellow-400'
+                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-yellow-500'
                   }`}
                 >
                   אחר

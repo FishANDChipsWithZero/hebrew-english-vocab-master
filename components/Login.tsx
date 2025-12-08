@@ -63,12 +63,14 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
               <GoogleLogin
                 onSuccess={handleSuccess}
                 onError={handleError}
-                theme="filled_blue"
+                theme="outline"
                 size="large"
                 text="signin_with"
-                shape="rectangular"
-                logo_alignment="left"
+                shape="pill"
+                logo_alignment="center"
                 width="280"
+                useOneTap={false}
+                auto_select={false}
               />
             </div>
 

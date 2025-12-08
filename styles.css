@@ -41,16 +41,16 @@
 .avatar-img { transition: transform 180ms ease; }
 .group:hover .avatar-img, .group:focus .avatar-img { transform: scale(1.06); }
 
-/* Sentence bank header neon blue */
+/* Sentence bank header gold */
 .sentence-bank-header {
-  color: #00f0ff;
-  text-shadow: 0 0 10px rgba(0,240,255,0.25), 0 0 20px rgba(0,170,255,0.08);
+  color: #f0d98f;
+  text-shadow: 0 0 10px rgba(219,193,112,0.4), 0 0 20px rgba(219,193,112,0.2);
 }
 
 .sentence-bank-pill {
-  background: rgba(3,105,161,0.12);
-  border: 1px solid rgba(3,105,161,0.18);
-  color: #dffeff;
+  background: rgba(219,193,112,0.12);
+  border: 1px solid rgba(219,193,112,0.25);
+  color: #f8f3e3;
 }
 
 /* Gaming-style back button used across screens for consistency - Mobile Optimized */
@@ -61,16 +61,16 @@
   padding: 0.35rem 0.6rem;
   border-radius: 9999px;
   background: linear-gradient(180deg, #0b1220 0%, #08101a 100%);
-  color: #dffcff;
+  color: #f8f3e3;
   font-weight: 800;
-  border: 1px solid rgba(34,211,238,0.06);
-  box-shadow: 0 6px 0 rgba(3,105,161,0.06), 0 4px 14px rgba(2,6,23,0.6);
+  border: 1px solid rgba(219,193,112,0.2);
+  box-shadow: 0 6px 0 rgba(219,193,112,0.1), 0 4px 14px rgba(2,6,23,0.6);
   transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
   font-size: 0.75rem;
 }
 .btn-back-gaming:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(2,6,23,0.7), 0 8px 0 rgba(3,105,161,0.08);
+  box-shadow: 0 10px 24px rgba(2,6,23,0.7), 0 8px 0 rgba(219,193,112,0.15);
 }
 .btn-back-gaming:active {
   transform: translateY(0px) scale(0.995);
@@ -164,11 +164,11 @@
   overflow-y: auto;
 }
 .vocab-group { margin-bottom: 1.25rem; }
-.vocab-group h3 { font-size: 1.05rem; font-weight: 800; color: #e6f9ff; margin-bottom: 0.6rem; }
+.vocab-group h3 { font-size: 1.05rem; font-weight: 800; color: #f0d98f; margin-bottom: 0.6rem; }
 .vocab-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; }
 .vocab-item { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.35rem 0.5rem; border-radius: 8px; }
-.vocab-item .eng { color: #dbeafe; font-weight: 700; }
-.vocab-item .heb { color: #f0fdfa; font-weight: 600; }
+.vocab-item .eng { color: #e2e8f0; font-weight: 700; }
+.vocab-item .heb { color: #f8fafc; font-weight: 600; }
 
 /* On small screens show single column for easier scrolling */
 @media (max-width: 640px) {
@@ -182,19 +182,18 @@
 .login-screen {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #020617;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(219, 193, 112, 0.15), transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(59, 130, 246, 0.1), transparent 50%);
+  background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%;
+  background-position: 0 0, 0 0, center, center;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  animation: gradientShift 8s ease infinite;
-  background-size: 200% 200%;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 .login-container {
@@ -215,14 +214,14 @@
 }
 
 .login-card {
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(15, 23, 42, 0.95);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
-              0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(219, 193, 112, 0.3) inset;
   overflow: hidden;
-  animation: cardFloat 3s ease-in-out infinite;
+  border: 1px solid rgba(219, 193, 112, 0.2);
 }
 
 @media (max-width: 640px) {
@@ -237,11 +236,12 @@
 }
 
 .login-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, rgba(219, 193, 112, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%);
   padding: 2.5rem 2rem 2rem 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-bottom: 2px solid rgba(219, 193, 112, 0.3);
 }
 
 @media (max-width: 640px) {
@@ -257,7 +257,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(219, 193, 112, 0.1) 0%, transparent 70%);
   animation: shimmer 4s linear infinite;
 }
 
@@ -268,12 +268,11 @@
 
 .login-header h1 {
   font-size: 2.5rem;
-  color: white;
+  color: #f8fafc;
   margin: 0 0 0.5rem 0;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 20px rgba(219, 193, 112, 0.4), 0 0 40px rgba(219, 193, 112, 0.2);
   position: relative;
   z-index: 1;
-  animation: titlePulse 2s ease-in-out infinite;
 }
 
 @media (max-width: 640px) {
@@ -312,7 +311,7 @@
 
 .login-subtitle {
   text-align: center;
-  color: #4a5568;
+  color: #cbd5e1;
   font-size: 1.05rem;
   margin: 0 0 2rem 0;
   font-weight: 500;
@@ -336,12 +335,17 @@
   transform: scale(1.02);
 }
 
+/* Override Google button iframe styles */
+.google-login-wrapper > div {
+  filter: brightness(1.1) contrast(1.05);
+}
+
 .login-features {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding-top: 1.5rem;
-  border-top: 2px solid #e2e8f0;
+  border-top: 2px solid rgba(219, 193, 112, 0.3);
 }
 
 .feature {
@@ -349,10 +353,10 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem;
-  background: linear-gradient(135deg, #f0f4ff 0%, #e6efff 100%);
+  background: rgba(30, 41, 59, 0.5);
   border-radius: 12px;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  border: 1px solid rgba(219, 193, 112, 0.2);
 }
 
 @media (max-width: 640px) {
@@ -372,8 +376,9 @@
 
 .feature:hover {
   transform: translateX(4px);
-  border-color: #667eea;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  border-color: rgba(219, 193, 112, 0.6);
+  box-shadow: 0 4px 12px rgba(219, 193, 112, 0.3), 0 0 20px rgba(219, 193, 112, 0.15);
+  background: rgba(30, 41, 59, 0.8);
 }
 
 .feature-icon {
@@ -382,7 +387,7 @@
 }
 
 .feature span:last-child {
-  color: #2d3748;
+  color: #e2e8f0;
   font-weight: 600;
   font-size: 0.95rem;
 }

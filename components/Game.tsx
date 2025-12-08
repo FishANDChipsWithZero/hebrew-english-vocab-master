@@ -508,7 +508,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
     }
   };
 
-  if (!currentWord) return <div className="text-center p-10 font-bold text-2xl animate-pulse text-cyan-400">טוען משחק...</div>;
+  if (!currentWord) return <div className="text-center p-10 font-bold text-2xl animate-pulse text-yellow-400">טוען משחק...</div>;
 
   const wordsDone = activeWords.filter(w => w.successCount >= REQUIRED_WINS).length;
   const totalWords = activeWords.length;
@@ -549,7 +549,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
           </div>
           <div className="overflow-hidden">
             <div className="font-bold text-white text-lg truncate">{user.name}</div>
-            <div className="text-sm font-black text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">
+            <div className="text-sm font-black text-yellow-400 drop-shadow-[0_0_5px_rgba(219,193,112,0.8)]">
                XP: {currentPoints}
             </div>
           </div>
@@ -601,8 +601,8 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
       </div>
 
       {/* Progress Bar */}
-      <div className="mb-6 relative">
-          <div className="flex justify-between text-xs font-bold text-slate-400 mb-1 px-1">
+      <div className="mb-6 relative mt-3">
+          <div className="flex justify-between text-xs font-bold text-slate-400 mb-2 px-1">
             <span>התקדמות</span>
             <span>{wordsDone} / {totalWords} מילים מוכרות</span>
           </div>
@@ -629,13 +629,13 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
           <div className="bg-slate-900 p-4 md:p-6 text-center relative overflow-hidden min-h-[180px] flex flex-col justify-center items-center group">
             
             {/* Background Decoration */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900 via-slate-950 to-slate-950"></div>
+            <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-900 via-slate-950 to-slate-950"></div>
             
             {/* Word - Adjusted with break-words and responsive text sizing */}
             <div className="w-full px-2 z-10">
               {sentenceBank.length > 0 && (
                 <div className="mb-2 w-full">
-                  <div className="text-sm sm:text-base md:text-lg font-black tracking-wide mb-1.5 sentence-bank-header text-cyan-300">מחסן מילים</div>
+                  <div className="text-sm sm:text-base md:text-lg font-black tracking-wide mb-1.5 sentence-bank-header text-yellow-300">מחסן מילים</div>
                   <div className="flex flex-wrap gap-1.5">
                     {sentenceBank.map((w, idx) => (
                       <span key={idx} className="inline-block bg-slate-900/70 text-white px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold">{w}</span>
@@ -656,7 +656,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
               {/* Distinct Part of Speech Badge */}
               {parsedWord.pos && (
                 <div className="mb-2">
-                  <span className="inline-block bg-fuchsia-900/50 border border-fuchsia-500 text-fuchsia-300 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase shadow-[0_0_10px_rgba(217,70,239,0.3)] neon-text-glow">
+                  <span className="inline-block bg-yellow-900/50 border border-yellow-500 text-yellow-300 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase shadow-[0_0_10px_rgba(219,193,112,0.4)] neon-text-glow">
                     {parsedWord.pos}
                   </span>
                 </div>
@@ -666,7 +666,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             <button 
               onClick={playAudio}
               type="button"
-              className="relative z-10 btn-3d bg-cyan-700 hover:bg-cyan-600 text-white border-b-4 border-cyan-900 rounded-xl px-3 py-1.5 flex items-center gap-1.5 font-bold text-xs sm:text-sm transition-all active:border-b-0 active:translate-y-1 shadow-lg mt-1"
+              className="relative z-10 btn-3d bg-amber-600 hover:bg-amber-500 text-slate-900 border-b-4 border-amber-800 rounded-xl px-3 py-1.5 flex items-center gap-1.5 font-bold text-xs sm:text-sm transition-all active:border-b-0 active:translate-y-1 shadow-lg shadow-amber-900/50 mt-1"
             >
               <span className="text-sm">🔊</span> שמע הגייה
             </button>
@@ -795,7 +795,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                                 ? 'border-red-500 bg-red-900/30 text-red-200'
                                 : feedback !== 'none' && isCorrect
                                   ? 'border-green-500 bg-green-900/20 text-green-300'
-                                  : 'border-slate-600 bg-slate-900 text-slate-200 hover:border-cyan-500 hover:bg-slate-800'
+                                  : 'border-slate-600 bg-slate-900 text-slate-200 hover:border-yellow-500 hover:bg-slate-800'
                           }`}
                         >
                           {String.fromCharCode(65 + index)}. {option}
@@ -809,7 +809,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                 <div className="relative">
                   <label className={`block text-center text-xs sm:text-sm font-bold mb-2 uppercase tracking-wider ${
                     isSentenceMode 
-                      ? 'text-cyan-300 bg-cyan-900/20 py-2 rounded-lg border border-cyan-700/30' 
+                      ? 'text-yellow-300 bg-yellow-900/20 py-2 rounded-lg border border-yellow-700/30' 
                       : 'text-slate-400'
                   }`}>
                     {hasMultipleBlanks ? 'השלימו את המילים החסרות (עם פסיק ביניהן)' : isSentenceMode ? 'השלימו את המילה החסרה' : 'תרגום לעברית'}
@@ -828,7 +828,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                           ? 'border-green-500 bg-green-900/20 text-green-200 ring-2 ring-green-500/50'
                           : feedback === 'close'
                             ? 'border-yellow-500 bg-yellow-900/20 text-yellow-200' 
-                            : 'border-slate-600 bg-slate-900 text-cyan-300 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/20'
+                            : 'border-slate-600 bg-slate-900 text-yellow-300 focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/20'
                     }`}
                     placeholder={hasMultipleBlanks ? 'walked, ate' : isSentenceMode ? 'הקלד את המילה החסרה' : 'הקלד את התרגום'}
                   />
@@ -854,13 +854,13 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                     )}
                     {isSentenceMode && revealedTranslation && !currentWord.options && (
                       <div className="mt-3 p-3 bg-slate-900/70 rounded-lg text-sm text-slate-100 border border-slate-700" dir="rtl">
-                        <p className="text-cyan-300 font-bold mb-1">תרגום:</p>
+                        <p className="text-yellow-300 font-bold mb-1">תרגום:</p>
                         <div className="whitespace-normal break-words hebrew-text">{revealedTranslation}</div>
                       </div>
                     )}
                     {loadingReveal && isSentenceMode && !currentWord.options && (
                       <div className="mt-3 p-3 bg-slate-900/70 rounded-lg text-sm text-slate-100 border border-slate-700" dir="rtl">
-                        <div className="text-cyan-300">מתרגם...</div>
+                        <div className="text-yellow-300">מתרגם...</div>
                       </div>
                     )}
                   </div>
@@ -894,7 +894,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                       <button
                         type="submit"
                         disabled={!userAnswer.trim()}
-                        className="w-full btn-3d bg-fuchsia-700 hover:bg-fuchsia-600 text-white py-3 rounded-xl font-black text-base sm:text-lg shadow-lg border-b-4 border-fuchsia-900 disabled:opacity-50 disabled:shadow-none disabled:transform-none disabled:border-b-0"
+                        className="w-full btn-3d bg-yellow-700 hover:bg-yellow-600 text-slate-900 py-3 rounded-xl font-black text-base sm:text-lg shadow-lg border-b-4 border-yellow-900 disabled:opacity-50 disabled:shadow-none disabled:transform-none disabled:border-b-0"
                       >
                         בדיקה
                       </button>
@@ -910,7 +910,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                     )}
                     {revealedAnswer && (
                       <div className="mt-3 p-3 bg-slate-900/70 rounded-lg text-sm text-slate-100 border border-slate-700">
-                        <div className="font-bold text-cyan-200 mb-1">המילה הנכונה: <span className="text-white">{revealedAnswer}</span></div>
+                        <div className="font-bold text-yellow-200 mb-1">המילה הנכונה: <span className="text-white">{revealedAnswer}</span></div>
                         <div dir="rtl" className="hebrew-text text-xs text-slate-300">{loadingReveal ? 'מטעין תרגום...' : (revealedTranslation || '')}</div>
                       </div>
                     )}
@@ -942,7 +942,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                           setShowHint(true);
                         }
                       }}
-                      className="text-sm font-medium text-slate-500 hover:text-cyan-400 transition-colors py-2"
+                      className="text-sm font-medium text-slate-500 hover:text-yellow-400 transition-colors py-2"
                     >
                       {(isSentenceMode || currentWord.options) ? (loadingHint ? 'מטעין רמז...' : (showHint ? 'הסתר רמז' : 'צריך רמז? 💡')) : (showHint ? `אות ראשונה: ${currentWord.hebrew.charAt(0)}` : 'צריך רמז? 💡')}
                     </button>
