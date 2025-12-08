@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Vocab Master AI</title>
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#020617" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="VocabMaster" />
+    <link rel="apple-touch-icon" href="/vite.svg" />
+
+    <script>
+      // Temporarily suppress Tailwind CDN production warning during load
+      (function(){
+        const originalWarn = console.warn.bind(console);
+        console.warn = function(msg, ...args) {
+          try {
+            if (typeof msg === 'string' && msg.includes('cdn.tailwindcss.com should not be used in production')) {
+              return; // ignore this specific Tailwind CDN warning
+            }
+          } catch (e) {}
+          originalWarn(msg, ...args);
+        };
+
+        const s = document.createElement('script');
+        s.src = 'https://cdn.tailwindcss.com';
+        s.onload = function() { console.warn = originalWarn; };
+        s.onerror = function() { console.warn = originalWarn; };
+        document.head.appendChild(s);
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Inter:wght@300;400;500;700;800&display=swap');
+      /* Default to Heebo for Hebrew/primary UI; use Inter for English content via :lang(en) */
+      body {
+        font-family: 'Heebo', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+        background-color: #020617; /* Slate 950 */
+        color: #f8fafc;
+        overflow-x: hidden;
+      }
+      :lang(en), .lang-en { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; }
+      
+      /* Gaming Background Pattern - Dark Neon */
+      .gaming-bg {
+        background-color: #020617;
+        background-image: 
+          linear-gradient(rgba(30, 41, 59, 0.3) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(30, 41, 59, 0.3) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+
+      /* Animations */
+      @keyframes pop-in {
+        0% { transform: scale(0.8); opacity: 0; }
+        60% { transform: scale(1.05); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .animate-pop-in {
+        animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+
+      @keyframes slide-up {
+        0% { transform: translateY(20px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+      }
+      .animate-slide-up {
+        animation: slide-up 0.5s ease-out forwards;
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-8px); }
+        40% { transform: translateX(8px); }
+        60% { transform: translateX(-4px); }
+        80% { transform: translateX(4px); }
+      }
+      .animate-shake {
+        animation: shake 0.4s ease-in-out;
+      }
+
+      @keyframes float-up {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-40px) scale(1.2); opacity: 0; }
+      }
+      .animate-float-up {
+        animation: float-up 0.8s ease-out forwards;
+      }
+
+      /* Neon Glow Effects */
+      .neon-border {
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.3), inset 0 0 5px rgba(6, 182, 212, 0.1);
+      }
+      
+      .neon-text-glow {
+        text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+      }
+
+      /* Custom confetti animation */
+      @keyframes confetti-fall {
+        0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+      }
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        top: -10px;
+        z-index: 50;
+        animation: confetti-fall linear forwards;
+      }
+
+      /* 3D Button Press effect */
+      .btn-3d {
+        transition: all 0.1s;
+        box-shadow: 0px 4px 0px 0px rgba(0,0,0,0.5);
+      }
+      .btn-3d:active {
+        transform: translateY(4px);
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.5);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="text-slate-100 gaming-bg min-h-screen">
+    <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

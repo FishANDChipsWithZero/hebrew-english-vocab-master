@@ -1,0 +1,36 @@
+﻿[
+    {
+        "displayName":  "3-girl",
+        "filename":  "3-girl.png"
+    },
+    {
+        "displayName":  "5BLOND-GIRL",
+        "filename":  "5BLOND-GIRL.png"
+    },
+    {
+        "displayName":  "boy-blond",
+        "filename":  "boy-blond.png",
+        "posClass": "avatar-pos-15"
+    },
+    {
+        "displayName":  "Boy-Haki",
+        "filename":  "Boy-Haki.png"
+    },
+    {
+        "displayName":  "boy-hat",
+        "filename":  "boy-hat.png"
+    },
+    {
+        "displayName":  "Girl ozniot",
+        "filename":  "Girl_ozniot.png"
+    },
+    {
+        "displayName":  "Jeans Girl",
+        "filename":  "Jeans_Girl.png"
+    },
+    {
+        "displayName":  "white-guy",
+        "filename":  "white-guy.png",
+        "posClass": "avatar-pos-30"
+    }
+]
