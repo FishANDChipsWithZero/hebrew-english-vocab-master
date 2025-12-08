@@ -417,7 +417,7 @@
   align-items: center;
   gap: 0.35rem;
   padding: 0.25rem 0.5rem;
-  background: rgba(239, 68, 68, 0.95);
+  background: rgba(219, 193, 112, 0.95);
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -426,7 +426,7 @@
 }
 
 .user-profile-mobile:hover {
-  background: rgba(220, 38, 38, 1);
+  background: rgba(240, 209, 117, 1);
   transform: scale(1.05);
 }
 
@@ -439,7 +439,7 @@
 }
 
 .logout-text-mobile {
-  color: white;
+  color: #1e293b;
   font-weight: 700;
   font-size: 0.7rem;
 }
