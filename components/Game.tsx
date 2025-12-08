@@ -666,7 +666,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             <button 
               onClick={playAudio}
               type="button"
-              className="relative z-10 btn-3d bg-amber-600 hover:bg-amber-500 text-slate-900 border-b-4 border-amber-800 rounded-xl px-3 py-1.5 flex items-center gap-1.5 font-bold text-xs sm:text-sm transition-all active:border-b-0 active:translate-y-1 shadow-lg shadow-amber-900/50 mt-1"
+              className="relative z-10 btn-3d bg-yellow-600 hover:bg-yellow-500 hover:shadow-yellow-500/50 text-slate-900 border-b-4 border-yellow-900 rounded-xl px-3 py-1.5 flex items-center gap-1.5 font-bold text-xs sm:text-sm transition-all active:border-b-0 active:translate-y-1 shadow-lg shadow-yellow-900/50 hover:shadow-xl mt-1"
             >
               <span className="text-sm">🔊</span> שמע הגייה
             </button>
