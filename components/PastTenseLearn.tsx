@@ -56,26 +56,24 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
 
         {/* Scrollable Infographic Display */}
         <div className="flex-1 overflow-y-auto p-3 sm:p-6">
-        <div className="bg-slate-900/50 rounded-xl sm:rounded-2xl p-2 sm:p-4 md:p-6 mb-4 sm:mb-6">
           <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-cyan-400 text-center mb-3 sm:mb-4">
             {infographics[currentSlide].title}
           </h3>
           
-          {/* Image Container - Clickable to zoom */}
-          <div className="flex justify-center items-center bg-white rounded-lg sm:rounded-xl p-2 sm:p-4 mb-3 sm:mb-4 cursor-pointer hover:bg-gray-50 transition-colors relative group"
+          {/* Image Container - Full height with scroll, clickable to zoom */}
+          <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-4 mb-3 sm:mb-4 cursor-pointer hover:bg-gray-50 transition-colors relative group"
                onClick={() => setIsZoomed(true)}>
             <img
               src={infographics[currentSlide].image}
               alt={infographics[currentSlide].title}
-              className="w-full h-auto object-contain rounded-lg shadow-lg"
-              style={{ maxHeight: 'none' }}
+              className="w-full h-auto max-w-full rounded-lg shadow-lg mx-auto block"
               onError={(e) => {
                 // Fallback if image doesn't exist
                 (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23334155" width="400" height="300"/%3E%3Ctext fill="%23cbd5e1" font-family="Arial" font-size="20" x="50%25" y="50%25" text-anchor="middle" dominant-baseline="middle"%3E%D7%94%D7%95%D7%A1%D7%A3 %D7%90%D7%AA %D7%94%D7%90%D7%99%D7%A0%D7%A4%D7%95%D7%92%D7%A8%D7%A4%D7%99%D7%A7%D7%94 %D7%9B%D7%90%D7%9F%3C/text%3E%3C/svg%3E';
               }}
             />
             {/* Zoom hint */}
-            <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute top-4 left-4 bg-cyan-600/90 text-white px-3 py-2 rounded-lg text-sm font-bold shadow-lg">
               🔍 לחץ להגדלה
             </div>
           </div>
@@ -106,10 +104,11 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
             </div>
           )}
 
-          <p className="text-slate-300 text-center text-sm sm:text-base md:text-lg px-2">
-            {infographics[currentSlide].description}
-          </p>
-        </div>
+          <div className="bg-slate-900/50 rounded-xl p-3 sm:p-4 mt-3">
+            <p className="text-slate-300 text-center text-sm sm:text-base md:text-lg">
+              {infographics[currentSlide].description}
+            </p>
+          </div>
         </div>
 
         {/* Navigation - Fixed at bottom */}
