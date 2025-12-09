@@ -184,7 +184,7 @@ const App: React.FC = () => {
             
             <button
               onClick={handleRestart}
-              className="w-full btn-3d bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-slate-900 font-black py-5 px-8 rounded-2xl text-xl shadow-lg transform transition"
+              className="w-full btn-3d btn-primary-gold py-5 px-8 rounded-2xl text-xl shadow-lg transform transition"
             >
               התחל רשימה חדשה ↺
             </button>

@@ -144,10 +144,10 @@
   width: 100%;
   max-width: 900px;
   max-height: 90vh;
-  background: linear-gradient(180deg, #071022 0%, #0b1220 100%);
-  border: 1px solid rgba(255,255,255,0.04);
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
   border-radius: 1rem;
-  box-shadow: 0 20px 60px rgba(2,6,23,0.8);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -183,10 +183,48 @@
 .gold-glow-blob-light { background-color: var(--accent-gold); }
 .gold-spinner { border-color: var(--accent-gold); border-top-color: transparent; }
 .text-gold { color: var(--accent-gold); }
+.text-cream { color: var(--text-primary); }
 .ring-gold { border-color: var(--accent-gold) !important; }
 .ring-gold-avatar {
   box-shadow: 0 0 30px rgba(240, 209, 112, 0.5);
   border-color: var(--accent-gold) !important;
+}
+.bg-luxury-card { background-color: var(--bg-card); }
+.bg-luxury-primary { background-color: var(--bg-primary); }
+.bg-gold { background-color: var(--accent-gold); }
+.border-gold { border-color: var(--border-gold); }
+.text-btn { color: var(--btn-text); }
+.btn-primary-gold {
+  background-color: var(--accent-gold);
+  color: var(--btn-text);
+  font-weight: 800;
+  transition: filter 0.2s;
+}
+.btn-primary-gold:hover {
+  filter: brightness(1.1);
+}
+.btn-secondary-gold {
+  background-color: transparent;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+.luxury-container {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 16px;
+}
+.luxury-input {
+  background-color: #2A2A2A;
+  border-color: var(--border-gold);
+  color: white;
+}
+.progress-bar-container {
+  background-color: var(--bg-card);
+  border-color: var(--border-gold);
+}
+.progress-bar-fill {
+  background-color: var(--accent-gold);
 }
 
 /* ============================================
@@ -195,14 +233,7 @@
 .login-screen {
   position: fixed;
   inset: 0;
-  background-color: #020617;
-  background-image: 
-    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-    radial-gradient(ellipse at 50% 0%, rgba(219, 193, 112, 0.15), transparent 50%),
-    radial-gradient(ellipse at 100% 100%, rgba(59, 130, 246, 0.1), transparent 50%);
-  background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%;
-  background-position: 0 0, 0 0, center, center;
+  background-color: var(--bg-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,14 +258,11 @@
 }
 
 .login-card {
-  background: rgba(15, 23, 42, 0.95);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-              0 0 0 1px rgba(219, 193, 112, 0.3) inset;
+  background: var(--bg-card);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  border: 1px solid rgba(219, 193, 112, 0.2);
+  border: 1px solid var(--border-gold);
 }
 
 @media (max-width: 640px) {
@@ -249,12 +277,12 @@
 }
 
 .login-header {
-  background: linear-gradient(135deg, rgba(219, 193, 112, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%);
+  background: var(--bg-card);
   padding: 2.5rem 2rem 2rem 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  border-bottom: 2px solid rgba(219, 193, 112, 0.3);
+  border-bottom: 1px solid var(--border-gold);
 }
 
 @media (max-width: 640px) {
@@ -263,27 +291,10 @@
   }
 }
 
-.login-header::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(219, 193, 112, 0.1) 0%, transparent 70%);
-  animation: shimmer 4s linear infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
 .login-header h1 {
   font-size: 2.5rem;
-  color: #f8fafc;
+  color: var(--accent-gold);
   margin: 0 0 0.5rem 0;
-  text-shadow: 0 2px 20px rgba(219, 193, 112, 0.4), 0 0 40px rgba(219, 193, 112, 0.2);
   position: relative;
   z-index: 1;
 }
@@ -305,7 +316,7 @@
 
 .login-header h2 {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--text-primary);
   font-weight: 600;
   margin: 0;
   position: relative;
@@ -324,7 +335,7 @@
 
 .login-subtitle {
   text-align: center;
-  color: #cbd5e1;
+  color: var(--text-primary);
   font-size: 1.05rem;
   margin: 0 0 2rem 0;
   font-weight: 500;

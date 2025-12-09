@@ -52,28 +52,28 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
 
   return (
     <div className="w-full max-w-md mx-auto animate-slide-up px-2 sm:px-4">
-      <div className="bg-slate-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-slate-700 relative overflow-hidden neon-border">
+      <div className="backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 relative overflow-hidden luxury-container">
         
-        {/* Decorative background blobs (moved/toned down to avoid overlapping avatars) */}
-        <div className="absolute -top-28 -right-36 w-28 h-28 bg-yellow-700 rounded-full blur-[60px] opacity-20 pointer-events-none -z-10"></div>
-        <div className="absolute -bottom-28 -left-36 w-28 h-28 bg-yellow-700 rounded-full blur-[60px] opacity-18 pointer-events-none -z-10"></div>
+        {/* Decorative background blobs */}
+        <div className="absolute -top-28 -right-36 w-28 h-28 rounded-full blur-[60px] opacity-10 pointer-events-none -z-10 gold-glow-blob-light"></div>
+        <div className="absolute -bottom-28 -left-36 w-28 h-28 rounded-full blur-[60px] opacity-10 pointer-events-none -z-10 gold-glow-blob-light"></div>
 
         <div className="relative z-10">
           <div className="text-center mb-4 sm:mb-6">
-            <h1 className="text-lg sm:text-xl font-bold text-slate-300 mb-2">
+            <h1 className="text-lg sm:text-xl font-bold mb-2 text-cream">
               👋 היי, {googleUser?.name || 'משתמש'}
             </h1>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs sm:text-sm font-bold text-slate-300 mb-1.5">שם משתמש:</label>
+              <label className="block text-xs sm:text-sm font-bold mb-1.5 text-cream">שם משתמש:</label>
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-slate-600 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all outline-none font-bold text-base bg-slate-900/50 text-white placeholder-slate-600"
+                className="w-full px-4 py-3 rounded-xl border transition-all outline-none font-bold text-base text-white luxury-input"
                 placeholder="איך לקרוא לך?"
               />
             </div>
@@ -144,7 +144,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                           <img src={`/avatars/${a.filename}`} alt={a.displayName} className={`avatar-img ${posClass} ${isSelected ? 'brightness-110' : ''}`} />
                         </div>
                       {isSelected && (
-                        <div className="absolute -top-1 -right-1 bg-gradient-to-br from-cyan-400 to-cyan-600 text-white text-xs font-black px-2 py-1 rounded-full shadow-lg z-10 animate-bounce">
+                        <div className="absolute -top-1 -right-1 text-xs font-black px-2 py-1 rounded-full shadow-lg z-10 animate-bounce bg-gold text-btn">
                           ✓
                         </div>
                       )}
@@ -157,7 +157,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             <button
               type="submit"
               disabled={!name.trim()}
-              className="w-full btn-3d bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 hover:to-amber-500 text-slate-900 font-black py-3 px-5 rounded-xl text-base sm:text-lg shadow-lg mt-3 disabled:opacity-50 disabled:cursor-not-allowed border-b-4 border-yellow-900"
+              className="w-full btn-3d btn-primary-gold py-3 px-5 rounded-xl text-base sm:text-lg shadow-lg mt-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {getGenderedText({ gender } as User, '🚀 בוא נתחיל!', '🚀 בואי נתחיל!', '🚀 בוא/י נתחיל!')}
             </button>

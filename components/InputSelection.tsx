@@ -123,7 +123,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
         <div className="mb-4 text-center">
           <button
             onClick={onResume}
-            className="heebo-font btn-3d bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-extrabold py-2.5 px-6 rounded-2xl shadow-xl text-sm sm:text-base transition-transform transform hover:scale-105 active:scale-95 motion-reduce:transition-none animate-pulse-slow"
+            className="heebo-font btn-3d btn-primary-gold font-extrabold py-2.5 px-6 rounded-2xl shadow-xl text-sm sm:text-base transform hover:scale-105 active:scale-95"
           >
             <span className="inline-block mr-1 text-base">▶️</span>
             <span className="align-middle">המשך תרגול</span>
@@ -234,7 +234,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               alert('ההתקדמות אופסה בהצלחה! עכשיו תוכל להתחיל מחדש.');
             }
           }}
-          className="heebo-font btn-3d bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-1.5 px-4 rounded-xl text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95"
+          className="heebo-font btn-3d btn-secondary-gold font-bold py-1.5 px-4 rounded-xl text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95"
         >
           <span className="inline-block mr-1 text-sm">🔄</span>
           <span className="align-middle">איפוס התקדמות</span>

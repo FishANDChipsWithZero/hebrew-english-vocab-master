@@ -592,18 +592,11 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             <span>התקדמות</span>
             <span>{wordsDone} / {totalWords} מילים מוכרות</span>
           </div>
-        <div className="h-4 bg-slate-900 rounded-full overflow-hidden border border-slate-700 shadow-inner">
+        <div className="h-4 rounded-full overflow-hidden border shadow-inner progress-bar-container">
           <div 
-            className="h-full bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 transition-all duration-700 ease-out shadow-[0_0_15px_rgba(16,185,129,0.8)]"
+            className="h-full transition-all duration-700 ease-out progress-bar-fill"
             style={{ width: `${progressPercentage}%` }}
-          >
-              <div
-                className="w-full h-full opacity-20"
-                style={{
-                  backgroundImage: 'radial-gradient(circle at center, rgba(14,116,144,0.25), rgba(15,23,42,0.0) 60%)',
-                }}
-              />
-          </div>
+          />
         </div>
       </div>
 
@@ -612,10 +605,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
         <div className="bg-slate-800 rounded-[2rem] shadow-2xl overflow-hidden border border-slate-600 transform transition-transform hover:scale-[1.01] neon-border">
           
           {/* Card Header / Word Display */}
-          <div className="bg-slate-900 p-4 md:p-6 text-center relative overflow-hidden min-h-[180px] flex flex-col justify-center items-center group">
-            
-            {/* Background Decoration */}
-            <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-900 via-slate-950 to-slate-950"></div>
+          <div className="p-4 md:p-6 text-center relative overflow-hidden min-h-[180px] flex flex-col justify-center items-center group bg-luxury-card">
             
             {/* Word - Adjusted with break-words and responsive text sizing */}
             <div className="w-full px-2 z-10">
