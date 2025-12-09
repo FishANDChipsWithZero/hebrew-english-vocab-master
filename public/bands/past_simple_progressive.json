@@ -9,7 +9,9 @@
       "were playing, started"
     ],
     "correctIndex": 2,
-    "explanation": "הפעולה של המשחק בחוץ הייתה מתמשכת (Past Continuous) עד שהיא נקטעה על ידי הפעולה הקצרה של תחילת הגשם (Past Simple)."
+    "explanation": "הפעולה של המשחק בחוץ הייתה מתמשכת (Past Continuous) עד שהיא נקטעה על ידי הפעולה הקצרה של תחילת הגשם (Past Simple).",
+    "hint": "הם שיחקו בחוץ כשפתאום התחיל לרדת גשם.",
+    "translation": "הם שיחקו בחוץ כשפתאום התחיל לרדת גשם."
   },
   {
     "id": "past_2",
@@ -22,7 +24,9 @@
       "was falling, was listening"
     ],
     "correctIndex": 0,
-    "explanation": "ההאזנה למוזיקה היא פעולת רקע מתמשכת (Past Continuous) שבמהלכה התרחשה פעולה קצרה ופתאומית של הירדמות (Past Simple)."
+    "explanation": "ההאזנה למוזיקה היא פעולת רקע מתמשכת (Past Continuous) שבמהלכה התרחשה פעולה קצרה ופתאומית של הירדמות (Past Simple).",
+    "hint": "נרדמתי תוך כדי שהקשבתי למוזיקה.",
+    "translation": "נרדמתי תוך כדי שהקשבתי למוזיקה."
   },
   {
     "id": "past_3",
@@ -35,7 +39,9 @@
       "were traveling, recorded"
     ],
     "correctIndex": 1,
-    "explanation": "שתי הפעולות, הטיול וההקלטה, התרחשו במקביל לאורך זמן, ולכן שתיהן מתוארות בזמן Past Continuous."
+    "explanation": "שתי הפעולות, הטיול וההקלטה, התרחשו במקביל לאורך זמן, ולכן שתיהן מתוארות בזמן Past Continuous.",
+    "hint": "בזמן שוונסה ואח שלה טיילו, הם תיעדו את ההרפתקאות שלהם.",
+    "translation": "בזמן שוונסה ואח שלה טיילו, הם תיעדו את ההרפתקאות שלהם."
   },
   {
     "id": "past_4",
@@ -48,7 +54,9 @@
       "was asking, was daydreaming"
     ],
     "correctIndex": 1,
-    "explanation": "החלום בהקיץ הוא פעולת רקע מתמשכת (Past Continuous), אשר נקטעה על ידי הפעולה הקצרה של המורה ששאל שאלה (Past Simple)."
+    "explanation": "החלום בהקיץ הוא פעולת רקע מתמשכת (Past Continuous), אשר נקטעה על ידי הפעולה הקצרה של המורה ששאל שאלה (Past Simple).",
+    "hint": "המורה שאלה שאלה בזמן שחלמתי בהקיץ.",
+    "translation": "המורה שאלה שאלה בזמן שחלמתי בהקיץ."
   },
   {
     "id": "past_5",
@@ -61,7 +69,9 @@
       "you were doing"
     ],
     "correctIndex": 1,
-    "explanation": "השאלה מתמקדת בפעולה שהייתה בתהליך בזמן ספציפי בעבר (10 o'clock), ולכן נדרש שימוש ב-Past Continuous."
+    "explanation": "השאלה מתמקדת בפעולה שהייתה בתהליך בזמן ספציפי בעבר (10 o'clock), ולכן נדרש שימוש ב-Past Continuous.",
+    "hint": "מה עשית אתמול בלילה בשעה עשר?",
+    "translation": "מה עשית אתמול בלילה בשעה עשר?"
   },
   {
     "id": "past_6",
@@ -74,7 +84,9 @@
       "walked, was hearing"
     ],
     "correctIndex": 0,
-    "explanation": "ההליכה ברחוב היא פעולת רקע מתמשכת (Past Continuous), והשמיעה הפתאומית של הצעדים היא הפעולה הקצרה שקטעה אותה (Past Simple)."
+    "explanation": "ההליכה ברחוב היא פעולת רקע מתמשכת (Past Continuous), והשמיעה הפתאומית של הצעדים היא הפעולה הקצרה שקטעה אותה (Past Simple).",
+    "hint": "הלכתי ברחוב כשפתאום שמעתי צעדים מאחוריי.",
+    "translation": "הלכתי ברחוב כשפתאום שמעתי צעדים מאחוריי."
   },
   {
     "id": "past_7",
@@ -87,7 +99,9 @@
       "took, was not looking"
     ],
     "correctIndex": 3,
-    "explanation": "צילום התמונה הוא פעולה קצרה (Past Simple) שהתרחשה בזמן שהפעולה של 'לא להסתכל' הייתה מתמשכת (Past Continuous)."
+    "explanation": "צילום התמונה הוא פעולה קצרה (Past Simple) שהתרחשה בזמן שהפעולה של 'לא להסתכל' הייתה מתמשכת (Past Continuous).",
+    "hint": "סם צילם אותי בזמן שלא הסתכלתי.",
+    "translation": "סם צילם אותי בזמן שלא הסתכלתי."
   },
   {
     "id": "past_8",
@@ -100,7 +114,9 @@
       "dropped, was doing"
     ],
     "correctIndex": 3,
-    "explanation": "שטיפת הכלים היא פעולת רקע מתמשכת (Past Continuous), והפלת הצלחת היא פעולה קצרה ופתאומית (Past Simple) שקרתה במהלכה."
+    "explanation": "שטיפת הכלים היא פעולת רקע מתמשכת (Past Continuous), והפלת הצלחת היא פעולה קצרה ופתאומית (Past Simple) שקרתה במהלכה.",
+    "hint": "אתמול בלילה הפלתי צלחת כששטפתי כלים.",
+    "translation": "אתמול בלילה הפלתי צלחת כששטפתי כלים."
   },
   {
     "id": "past_9",
@@ -113,7 +129,9 @@
       "were arriving, had"
     ],
     "correctIndex": 0,
-    "explanation": "המקלחת היא פעולת רקע מתמשכת (Past Continuous), וההגעה של החברים היא פעולה קצרה (Past Simple) שקרתה במהלכה."
+    "explanation": "המקלחת היא פעולת רקע מתמשכת (Past Continuous), וההגעה של החברים היא פעולה קצרה (Past Simple) שקרתה במהלכה.",
+    "hint": "החברים שלי הגיעו בזמן שהתקלחתי.",
+    "translation": "החברים שלי הגיעו בזמן שהתקלחתי."
   },
   {
     "id": "past_10",
@@ -126,7 +144,9 @@
       "tried, was appearing"
     ],
     "correctIndex": 0,
-    "explanation": "הניסיונות להתקשר היו פעולה מתמשכת (Past Continuous) ששימשה רקע להופעתו הפתאומית (Past Simple)."
+    "explanation": "הניסיונות להתקשר היו פעולה מתמשכת (Past Continuous) ששימשה רקע להופעתו הפתאומית (Past Simple).",
+    "hint": "בזמן שהקולגות שלו ניסו להתקשר אליו, הוא הופיע.",
+    "translation": "בזמן שהקולגות שלו ניסו להתקשר אליו, הוא הופיע."
   },
   {
     "id": "past_11",
@@ -139,7 +159,9 @@
       "did you drive, happened"
     ],
     "correctIndex": 1,
-    "explanation": "השאלה מתייחסת לפעולת הנהיגה המתמשכת (Past Continuous) ברקע, וכיצד היא נקטעה על ידי התאונה (Past Simple)."
+    "explanation": "השאלה מתייחסת לפעולת הנהיגה המתמשכת (Past Continuous) ברקע, וכיצד היא נקטעה על ידי התאונה (Past Simple).",
+    "hint": "באיזו מהירות נסעת כשהתאונה קרתה?",
+    "translation": "באיזו מהירות נסעת כשהתאונה קרתה?"
   },
   {
     "id": "past_12",
@@ -152,7 +174,9 @@
       "watched, went"
     ],
     "correctIndex": 2,
-    "explanation": "הצפייה בסרט הייתה פעולה מתמשכת (Past Continuous) אשר נקטעה על ידי הפסקת החשמל, שהיא אירוע קצר ופתאומי (Past Simple)."
+    "explanation": "הצפייה בסרט הייתה פעולה מתמשכת (Past Continuous) אשר נקטעה על ידי הפסקת החשמל, שהיא אירוע קצר ופתאומי (Past Simple).",
+    "hint": "צפינו בסרט כשהחשמל נפל.",
+    "translation": "צפינו בסרט כשהחשמל נפל."
   },
   {
     "id": "past_13",
@@ -165,7 +189,9 @@
       "had cooked"
     ],
     "correctIndex": 0,
-    "explanation": "המשפט מתאר פעולה שהייתה בתהליך בנקודת זמן ספציפית בעבר (6 PM yesterday), ולכן נדרש שימוש ב-Past Continuous."
+    "explanation": "המשפט מתאר פעולה שהייתה בתהליך בנקודת זמן ספציפית בעבר (6 PM yesterday), ולכן נדרש שימוש ב-Past Continuous.",
+    "hint": "אתמול בשש בערב בישלתי ארוחת ערב.",
+    "translation": "אתמול בשש בערב בישלתי ארוחת ערב."
   },
   {
     "id": "past_14",
@@ -178,7 +204,9 @@
       "was having, was not watching"
     ],
     "correctIndex": 2,
-    "explanation": "התאונה היא אירוע קצר (Past Simple), והסיבה לה היא פעולת רקע מתמשכת של חוסר תשומת לב לכביש (Past Continuous)."
+    "explanation": "התאונה היא אירוע קצר (Past Simple), והסיבה לה היא פעולת רקע מתמשכת של חוסר תשומת לב לכביש (Past Continuous).",
+    "hint": "סילביה עשתה תאונה כי היא לא הסתכלה על הכביש.",
+    "translation": "סילביה עשתה תאונה כי היא לא הסתכלה על הכביש."
   },
   {
     "id": "past_15",
@@ -191,6 +219,8 @@
       "was studying, chose"
     ],
     "correctIndex": 3,
-    "explanation": "הלימודים באוניברסיטה הם פעולת רקע מתמשכת (Past Continuous), והבחירה לנסוע היא החלטה ספציפית (Past Simple) שנעשתה במהלך אותה תקופה."
+    "explanation": "הלימודים באוניברסיטה הם פעולת רקע מתמשכת (Past Continuous), והבחירה לנסוע היא החלטה ספציפית (Past Simple) שנעשתה במהלך אותה תקופה.",
+    "hint": "בזמן שלמדתי באוניברסיטה, בחרתי לנסוע למדינה אחרת.",
+    "translation": "בזמן שלמדתי באוניברסיטה, בחרתי לנסוע למדינה אחרת."
   }
 ]

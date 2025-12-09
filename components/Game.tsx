@@ -471,36 +471,22 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
         // Build filled sentence by replacing underscore sequences with the correct answer
         const filled = currentWord.english.replace(/_+/g, ` ${correct} `);
 
-        (async () => {
-          try {
-            // Translate the filled sentence
-            const t = await translateSentence(filled);
-            setRevealedTranslation(t || '');
-            
-            // Also translate just the word if it's from a sentence bank
-            // Check if the word is in English (not Hebrew) by checking if it contains Latin characters
-            if (correct && /[a-zA-Z]/.test(correct)) {
-              try {
-                const wordTranslation = await translateSentence(correct);
-                if (wordTranslation) {
-                  setRevealedTranslation(`${wordTranslation} - ${t || ''}`);
-                }
-              } catch (e) {
-                // Keep the sentence translation if word translation fails
-              }
-            }
-          } catch (e) {
-            setRevealedTranslation('לא ניתן לתרגם כרגע');
-          } finally {
-            setLoadingReveal(false);
-            // Wait 3 seconds for the student to see the revealed filled sentence and translation, then continue
-            setTimeout(() => {
-              // Persist state and pick next
-              persistProgress(updatedWords);
-              pickNextWord(updatedWords, nextTurn);
-            }, 3000);
-          }
-        })();
+        // Use pre-generated translation from JSON (no API call!)
+        const preGeneratedTranslation = (currentWord as any).translation;
+        if (preGeneratedTranslation) {
+          setRevealedTranslation(preGeneratedTranslation);
+        } else {
+          // Fallback to showing just the filled sentence if no translation
+          setRevealedTranslation(filled);
+        }
+        setLoadingReveal(false);
+        
+        // Wait 3 seconds for the student to see the revealed filled sentence and translation, then continue
+        setTimeout(() => {
+          // Persist state and pick next
+          persistProgress(updatedWords);
+          pickNextWord(updatedWords, nextTurn);
+        }, 3000);
       } else {
         // non-sentence wrong answer: show the correct answer longer so student can see it - 6 seconds
         setTimeout(() => pickNextWord(updatedWords, nextTurn), 6000);
