@@ -137,8 +137,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                       aria-label={`בחר ${a.displayName}`}
                         className={`relative w-full aspect-[1/1] p-0 rounded-full transition-all duration-300 transform focus:outline-none overflow-hidden group ${
                           isSelected
-                          ? 'scale-110 ring-4 ring-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.5)] bg-transparent border-4 border-cyan-400 animate-pulse'
-                          : 'bg-slate-900/40 border-2 border-slate-600 hover:scale-105 hover:border-cyan-500 hover:shadow-lg'
+                          ? 'scale-110 ring-4 bg-transparent border-4 animate-pulse ring-gold-avatar' : 'bg-slate-900/40 border-2 border-slate-600 hover:scale-105 hover:shadow-lg'
                         }`}
                     >
                         <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-slate-800/50 avatar-wrapper">

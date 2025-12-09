@@ -52,6 +52,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       <div className="login-container">
         <div className="login-card">
           <div className="login-header">
+            <img src="/logo.jpg" alt="Pikmat" className="h-16 mx-auto mb-4 object-contain" />
             <h1 className="hebrew-text">🎓 לומדים אנגלית</h1>
             <h2>English - 8th Grade</h2>
           </div>

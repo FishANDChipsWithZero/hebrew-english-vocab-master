@@ -105,8 +105,8 @@ const App: React.FC = () => {
       {/* Animated Background Shapes - Neon Dark Mode */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-0 left-0 w-full h-full bg-slate-950 opacity-90"></div>
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-900 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse"></div>
-        <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-cyan-900 rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse delay-1000"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse gold-glow-blob"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] rounded-full mix-blend-screen filter blur-[120px] opacity-15 animate-pulse delay-1000 gold-glow-blob-light"></div>
         <div className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-fuchsia-900 rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse delay-2000"></div>
       </div>
 
@@ -115,18 +115,18 @@ const App: React.FC = () => {
         <div className="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 flex flex-col items-center justify-center animate-pop-in">
           <div className="relative w-24 h-24 mb-6">
             <div className="absolute inset-0 border-8 border-slate-800 rounded-full"></div>
-            <div className="absolute inset-0 border-8 border-cyan-500 rounded-full border-t-transparent animate-spin"></div>
+            <div className="absolute inset-0 border-8 rounded-full border-t-transparent animate-spin gold-spinner"></div>
             <div className="absolute inset-0 flex items-center justify-center text-3xl">🤖</div>
           </div>
-          <p className="text-cyan-400 font-bold text-2xl animate-pulse text-shadow-glow">מכין את המשחק...</p>
+          <p className="font-bold text-2xl animate-pulse text-gold">מכין את המשחק...</p>
           <p className="text-slate-400 mt-2 font-medium">זה ייקח כמה שניות</p>
         </div>
       )}
 
       {/* Header Logo */}
       <div className="absolute top-6 left-0 right-0 flex justify-center pointer-events-none z-20">
-        <div className="bg-slate-900/50 backdrop-blur-md px-6 py-2 rounded-full border border-slate-700 shadow-lg neon-border">
-          <h1 className="text-lg font-black text-slate-400 tracking-[0.3em]">VOCAB<span className="text-cyan-400 neon-text-glow">MASTER</span></h1>
+        <div className="bg-slate-900/50 backdrop-blur-md px-4 py-2 rounded-full border border-[var(--border-gold)] shadow-lg">
+          <img src="/logo.jpg" alt="Pikmat" className="h-8 object-contain" />
         </div>
       </div>
 
@@ -178,7 +178,7 @@ const App: React.FC = () => {
               <p className="text-slate-400">
                 סיימת את כל התרגול בהצלחה!
                 <br/>
-                <span className="font-bold text-cyan-400">עבודה מצוינת!</span>
+                <span className="font-bold text-gold">עבודה מצוינת!</span>
               </p>
             </div>
             

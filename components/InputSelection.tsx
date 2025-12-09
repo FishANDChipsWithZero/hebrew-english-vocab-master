@@ -148,7 +148,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'unit2_new_direction_plus.json' ? 'ring-2 ring-cyan-400' : ''}`}
+          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'unit2_new_direction_plus.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <div className="text-lg mb-1">🚀</div>
           <div>תרגול מילים</div>
@@ -176,7 +176,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font col-span-2 btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'sentences_practice.json' ? 'ring-2 ring-cyan-400' : ''}`}
+          className={`heebo-font col-span-2 btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'sentences_practice.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <span className="inline-block mr-2 text-lg">✍️</span>
           <span className="align-middle">תרגול משפטים</span>
@@ -199,7 +199,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'past_simple_progressive.json' ? 'ring-2 ring-cyan-400' : ''}`}
+          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'past_simple_progressive.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <div className="text-base mb-1">⏰</div>
           <div>Past Simple/Progressive</div>
