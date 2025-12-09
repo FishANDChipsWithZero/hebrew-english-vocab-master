@@ -558,7 +558,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
               persistProgress(activeWords);
               onBack?.();
             }}
-            className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center text-2xl hover:bg-gold hover:text-btn transition-all"
+            className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center text-xl hover:bg-gold hover:text-btn transition-all leading-none back-arrow-btn"
             title="חזרה"
           >
             ➜

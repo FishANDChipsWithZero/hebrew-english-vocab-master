@@ -248,6 +248,9 @@
 .zoom-modal {
   touch-action: manipulation;
 }
+.back-arrow-btn {
+  padding-top: 2px;
+}
 .zoom-hint-btn {
   background-color: var(--accent-gold);
   color: var(--btn-text);

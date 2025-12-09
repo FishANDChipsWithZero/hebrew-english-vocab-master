@@ -50,7 +50,7 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
             </button>
           </div>
           <div className="absolute top-3 sm:top-6 right-3 sm:right-6">
-            <button onClick={onBack} className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center text-2xl hover:bg-gold hover:text-btn transition-all" title="חזרה">
+            <button onClick={onBack} className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center text-xl hover:bg-gold hover:text-btn transition-all leading-none back-arrow-btn" title="חזרה">
               ➜
             </button>
           </div>
