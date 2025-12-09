@@ -579,10 +579,10 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
 
             {/* Streak Indicator */}
             <div className={`flex flex-col items-center z-10 transition-transform ${streak > 1 ? 'scale-110' : 'scale-100'}`}>
-            <div className="text-2xl font-black italic text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.6)] flex items-center gap-1">
+            <div className="text-lg sm:text-2xl font-black italic text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.6)] flex items-center gap-0.5">
                 {streak > 0 ? '🔥' : '❄️'} {streak}
             </div>
-            <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Streak</div>
+            <div className="text-[8px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-wider">Streak</div>
             </div>
         </div>
       </div>
