@@ -72,24 +72,27 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
                 (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23334155" width="400" height="300"/%3E%3Ctext fill="%23cbd5e1" font-family="Arial" font-size="20" x="50%25" y="50%25" text-anchor="middle" dominant-baseline="middle"%3E%D7%94%D7%95%D7%A1%D7%A3 %D7%90%D7%AA %D7%94%D7%90%D7%99%D7%A0%D7%A4%D7%95%D7%92%D7%A8%D7%A4%D7%99%D7%A7%D7%94 %D7%9B%D7%90%D7%9F%3C/text%3E%3C/svg%3E';
               }}
             />
-            {/* Zoom hint */}
-            <div className="absolute top-4 left-4 bg-yellow-600/90 text-slate-900 px-3 py-2 rounded-lg text-sm font-bold shadow-lg">
-              🔍 לחץ להגדלה
+            {/* Zoom hint - icon only on mobile, text on desktop */}
+            <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-yellow-600/90 text-slate-900 px-2 py-1 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-bold shadow-lg">
+              <span className="sm:hidden">🔍</span>
+              <span className="hidden sm:inline">🔍 לחץ להגדלה</span>
             </div>
           </div>
 
           {/* Zoomed Image Modal */}
           {isZoomed && (
             <div 
-              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-zoom-out"
+              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-zoom-out overflow-auto"
               onClick={() => setIsZoomed(false)}
+              style={{ touchAction: 'pan-x pan-y pinch-zoom' }}
             >
-              <div className="relative max-w-full max-h-full overflow-auto">
+              <div className="relative w-full h-full flex items-center justify-center">
                 <img
                   src={infographics[currentSlide].image}
                   alt={infographics[currentSlide].title}
-                  className="w-auto h-auto max-w-none"
-                  style={{ maxHeight: '95vh' }}
+                  className="max-w-full max-h-full object-contain"
+                  style={{ touchAction: 'pinch-zoom' }}
+                  onClick={(e) => e.stopPropagation()}
                 />
                 <button 
                   className="absolute top-4 right-4 bg-white/90 hover:bg-white text-black font-bold px-4 py-2 rounded-lg shadow-lg"
