@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Analytics } from '@vercel/analytics/react';
 import { AuthProvider } from './context/AuthContext';
 import AppWithAuth from './AppWithAuth';
 import './styles.css';
@@ -87,6 +88,7 @@ try {
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           <AuthProvider>
             <AppWithAuth />
+            <Analytics />
           </AuthProvider>
         </GoogleOAuthProvider>
       </ErrorBoundary>
