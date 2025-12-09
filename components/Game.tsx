@@ -522,11 +522,11 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
+    <div className="w-full max-w-2xl mx-auto px-2 sm:px-4 -mt-4">
       {/* Top Bar: User & Score */}
-      <div className="flex items-center justify-between bg-luxury-card backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg p-2 sm:p-3 mb-4 sm:mb-6 border luxury-container relative overflow-hidden">
-        <div className="flex items-center gap-2 sm:gap-3 z-10">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-luxury-card border border-gold flex items-center justify-center text-xl sm:text-2xl shadow-inner flex-shrink-0 overflow-hidden">
+      <div className="flex items-center justify-between bg-luxury-card backdrop-blur-md rounded-xl shadow-lg p-2 mb-3 border luxury-container relative overflow-hidden">
+        <div className="flex items-center gap-2 z-10">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-luxury-card border border-gold flex items-center justify-center text-lg sm:text-xl shadow-inner flex-shrink-0 overflow-hidden">
             {user.avatar ? (
               <img src={`/avatars/${user.avatar}`} alt={`${user.name} avatar`} className={`avatar-img ${avatarPosClass}`} />
             ) : (
@@ -534,44 +534,48 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             )}
           </div>
           <div className="overflow-hidden">
-            <div className="font-bold text-white text-lg truncate">{user.name}</div>
-            <div className="text-sm font-black text-yellow-400 drop-shadow-[0_0_5px_rgba(219,193,112,0.8)]">
+            <div className="font-bold text-white text-sm truncate">{user.name}</div>
+            <div className="text-xs font-bold text-yellow-400">
                XP: {currentPoints}
             </div>
           </div>
         </div>
-        
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Icon buttons - settings gear and back arrow */}
-          <button 
+
+        <div className="flex items-center gap-1 sm:gap-2">
+          {/* Settings button */}
+          <button
+            type="button"
             onClick={() => {
               persistProgress(activeWords);
               onBackToSettings?.();
             }}
-            className="p-2 rounded-lg text-2xl opacity-60 hover:opacity-100 transition-opacity"
+            className="nav-btn-top"
             title="הגדרות"
           >
-            ⚙️
+            <span className="text-lg">⚙</span>
           </button>
-          <button 
+          {/* Back button with icon */}
+          <button
+            type="button"
             onClick={() => {
               persistProgress(activeWords);
               onBack?.();
             }}
-            className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center text-xl hover:bg-gold hover:text-btn transition-all leading-none back-arrow-btn"
+            className="nav-btn-top"
             title="חזרה"
           >
-            ➜
+            <img src="/back-icon.png" alt="Back" className="nav-btn-back-icon" />
           </button>
 
-            {/* Mute Toggle */}
-            <button 
-                onClick={() => setIsMuted(!isMuted)}
-                className="p-2 rounded-lg text-xl opacity-60 hover:opacity-100 transition-opacity"
-                title={isMuted ? "הפעל סאונד" : "השתק סאונד"}
-            >
-                {isMuted ? '🔇' : '🔊'}
-            </button>
+          {/* Mute Toggle */}
+          <button
+            type="button"
+            onClick={() => setIsMuted(!isMuted)}
+            className="nav-btn-top"
+            title={isMuted ? "הפעל סאונד" : "השתק סאונד"}
+          >
+            <span className="text-lg">{isMuted ? '🔇' : '🔊'}</span>
+          </button>
 
             {/* Streak Indicator */}
             <div className={`flex flex-col items-center z-10 transition-transform ${streak > 1 ? 'scale-110' : 'scale-100'}`}>

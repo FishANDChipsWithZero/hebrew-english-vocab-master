@@ -12,18 +12,19 @@ const AppWithAuth: React.FC = () => {
 
   return (
     <>
-      {/* User Profile Header - Top Right Corner - Mobile Optimized */}
-      <div className="fixed top-2 right-2 z-[100]">
-        <button 
-          onClick={logout} 
+      {/* Top Navigation Bar - Right Corner */}
+      <div className="fixed top-2 right-2 z-[100] flex items-center gap-2">
+        {/* Logout Button - X icon */}
+        <button
+          type="button"
+          onClick={logout}
           title="Logout"
-          className="user-profile-mobile"
+          className="nav-btn-top"
         >
-          <img src={user?.picture} alt={user?.name} className="user-avatar-mobile" />
-          <span className="logout-text-mobile">Logout</span>
+          <span className="text-lg font-bold">✕</span>
         </button>
       </div>
-      
+
       <App />
     </>
   );

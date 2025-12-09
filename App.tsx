@@ -119,10 +119,10 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Header Logo - compact */}
+      {/* Header Logo - larger */}
       <div className="absolute top-0 left-0 right-0 pointer-events-none z-20">
         <div className="py-3 flex justify-center">
-          <img src="/logo.jpg" alt="Pikmat" className="h-12 sm:h-14 object-contain" />
+          <img src="/logo.jpg" alt="Pikmat" className="h-16 sm:h-20 object-contain" />
         </div>
         <div className="gold-divider"></div>
       </div>

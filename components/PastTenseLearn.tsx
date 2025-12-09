@@ -45,13 +45,13 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
             לימוד Past Simple / Progressive
           </h2>
           <div className="absolute top-3 sm:top-6 left-3 sm:left-6">
-            <button onClick={onBackToSettings} className="p-2 rounded-lg text-2xl opacity-60 hover:opacity-100 transition-opacity" title="הגדרות">
-              ⚙️
+            <button type="button" onClick={onBackToSettings} className="nav-btn-top" title="הגדרות">
+              <span className="text-lg">⚙</span>
             </button>
           </div>
           <div className="absolute top-3 sm:top-6 right-3 sm:right-6">
-            <button onClick={onBack} className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center text-xl hover:bg-gold hover:text-btn transition-all leading-none back-arrow-btn" title="חזרה">
-              ➜
+            <button type="button" onClick={onBack} className="nav-btn-top" title="חזרה">
+              <img src="/back-icon.png" alt="Back" className="nav-btn-back-icon" />
             </button>
           </div>
         </div>

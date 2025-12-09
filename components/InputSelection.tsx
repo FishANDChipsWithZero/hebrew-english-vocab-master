@@ -104,18 +104,10 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
   return (
     <>
     <div className="w-full max-w-2xl mx-auto bg-luxury-card backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border animate-slide-up relative z-10 luxury-container">
-      <div className="relative mb-3 sm:mb-5">
-        <h2 className="text-base sm:text-lg md:text-xl font-black text-center text-white neon-text-glow pr-12 sm:pr-0 heebo-font">
+      <div className="mb-3 sm:mb-5">
+        <h2 className="text-base sm:text-lg md:text-xl font-black text-center text-white neon-text-glow heebo-font">
           {getGenderedText(user, 'בחר מה ללמוד/לתרגל', 'בחרי מה ללמוד/לתרגל', 'בחר/י מה ללמוד/לתרגל')}
         </h2>
-        {/** Navigation buttons */}
-        {typeof onBack === 'function' && (
-          <div className="absolute top-0 left-0">
-            <button onClick={() => onBack && onBack()} className="p-2 rounded-lg text-2xl opacity-60 hover:opacity-100 transition-opacity" title="הגדרות">
-              ⚙️
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Resume button - shows if there's an active preset */}
