@@ -98,7 +98,7 @@ const groups = [
       ['extremely','באופן קיצוני'],
       ['horrible','נורא'],
       ['huge','ענק'],
-      ['minor','שולי / מינורי'],
+      ['minor','קטן'],
       ['otherwise','אחרת'],
       ['significant','משמעותי'],
       ['twice','פעמיים'],
