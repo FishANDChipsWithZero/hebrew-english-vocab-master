@@ -158,7 +158,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             <button
               type="submit"
               disabled={!name.trim()}
-              className="w-full btn-3d bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-black py-3 px-5 rounded-xl text-base sm:text-lg shadow-lg mt-3 disabled:opacity-50 disabled:cursor-not-allowed border-b-4 border-slate-900"
+              className="w-full btn-3d bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 hover:to-amber-500 text-slate-900 font-black py-3 px-5 rounded-xl text-base sm:text-lg shadow-lg mt-3 disabled:opacity-50 disabled:cursor-not-allowed border-b-4 border-yellow-900"
             >
               {getGenderedText({ gender } as User, '🚀 בוא נתחיל!', '🚀 בואי נתחיל!', '🚀 בוא/י נתחיל!')}
             </button>

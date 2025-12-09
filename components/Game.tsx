@@ -917,6 +917,13 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
                     <button
                       type="button"
                       onClick={async () => {
+                        // If hint is already shown, hide it
+                        if (showHint) {
+                          setShowHint(false);
+                          return;
+                        }
+                        
+                        // Otherwise, load and show the hint
                         if ((isSentenceMode || currentWord.options) && currentWord) {
                           setLoadingHint(true);
                           const textToTranslate = currentWord.english;
