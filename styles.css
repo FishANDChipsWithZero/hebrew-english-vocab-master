@@ -226,6 +226,12 @@
 .progress-bar-fill {
   background-color: var(--accent-gold);
 }
+.luxury-logo-header {
+  border-color: var(--accent-gold);
+  border-width: 1px;
+  background-color: transparent;
+  box-shadow: 0 0 30px rgba(240, 209, 112, 0.3);
+}
 
 /* ============================================
    Login Screen Styling - Gamification Theme

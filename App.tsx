@@ -102,12 +102,9 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">
       
-      {/* Animated Background Shapes - Neon Dark Mode */}
+      {/* Clean Luxury Background - No animations */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-0 left-0 w-full h-full bg-slate-950 opacity-90"></div>
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse gold-glow-blob"></div>
-        <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] rounded-full mix-blend-screen filter blur-[120px] opacity-15 animate-pulse delay-1000 gold-glow-blob-light"></div>
-        <div className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-fuchsia-900 rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse delay-2000"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-luxury-primary"></div>
       </div>
 
       {/* Loading Overlay */}
@@ -116,17 +113,16 @@ const App: React.FC = () => {
           <div className="relative w-24 h-24 mb-6">
             <div className="absolute inset-0 border-8 border-slate-800 rounded-full"></div>
             <div className="absolute inset-0 border-8 rounded-full border-t-transparent animate-spin gold-spinner"></div>
-            <div className="absolute inset-0 flex items-center justify-center text-3xl">🤖</div>
           </div>
           <p className="font-bold text-2xl animate-pulse text-gold">מכין את המשחק...</p>
-          <p className="text-slate-400 mt-2 font-medium">זה ייקח כמה שניות</p>
+          <p className="text-cream mt-2 font-medium">זה ייקח כמה שניות</p>
         </div>
       )}
 
       {/* Header Logo */}
       <div className="absolute top-6 left-0 right-0 flex justify-center pointer-events-none z-20">
-        <div className="bg-slate-900/50 backdrop-blur-md px-6 py-3 rounded-3xl border-2 border-[var(--border-gold)] shadow-lg">
-          <img src="/logo.jpg" alt="Pikmat" className="h-16 object-contain rounded-2xl" />
+        <div className="px-8 py-4 rounded-3xl border luxury-logo-header">
+          <img src="/logo.jpg" alt="Pikmat" className="h-20 object-contain" />
         </div>
       </div>
 

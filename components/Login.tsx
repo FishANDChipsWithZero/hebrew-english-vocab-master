@@ -76,20 +76,16 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
 
             <div className="login-features">
               <div className="feature">
-                <span className="feature-icon">📚</span>
-                <span className="hebrew-text">תרגול אוצר מילים אינטראקטיבי</span>
+                <span className="hebrew-text">• תרגול אוצר מילים אינטראקטיבי</span>
               </div>
               <div className="feature">
-                <span className="feature-icon">🎯</span>
-                <span className="hebrew-text">תרגילי השלמת משפטים</span>
+                <span className="hebrew-text">• תרגילי השלמת משפטים</span>
               </div>
               <div className="feature">
-                <span className="feature-icon">⏰</span>
-                <span className="hebrew-text">תרגול Past Simple & Past Progressive</span>
+                <span className="hebrew-text">• תרגול Past Simple & Past Progressive</span>
               </div>
               <div className="feature">
-                <span className="feature-icon">⭐</span>
-                <span className="hebrew-text">מעקב אחרי ההתקדמות ונקודות ניסיון</span>
+                <span className="hebrew-text">• מעקב אחרי ההתקדמות ונקודות ניסיון</span>
               </div>
             </div>
           </div>
