@@ -125,8 +125,8 @@ const App: React.FC = () => {
 
       {/* Header Logo */}
       <div className="absolute top-6 left-0 right-0 flex justify-center pointer-events-none z-20">
-        <div className="bg-slate-900/50 backdrop-blur-md px-4 py-2 rounded-full border border-[var(--border-gold)] shadow-lg">
-          <img src="/logo.jpg" alt="Pikmat" className="h-8 object-contain" />
+        <div className="bg-slate-900/50 backdrop-blur-md px-6 py-3 rounded-3xl border-2 border-[var(--border-gold)] shadow-lg">
+          <img src="/logo.jpg" alt="Pikmat" className="h-16 object-contain rounded-2xl" />
         </div>
       </div>
 
