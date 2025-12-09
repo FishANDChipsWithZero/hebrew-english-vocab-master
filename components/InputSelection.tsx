@@ -148,14 +148,14 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'unit2_new_direction_plus.json' ? 'ring-2 ring-gold' : ''}`}
+          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border ${presetFilename === 'unit2_new_direction_plus.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <div>תרגול מילים</div>
         </button>
 
         <button
           onClick={() => setShowVocab(true)}
-          className="heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95"
+          className="heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border"
         >
           <div>אוצר המילים</div>
         </button>
@@ -174,7 +174,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font col-span-2 btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'sentences_practice.json' ? 'ring-2 ring-gold' : ''}`}
+          className={`heebo-font col-span-2 btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border ${presetFilename === 'sentences_practice.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <span className="align-middle">תרגול משפטים</span>
         </button>
@@ -196,7 +196,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'past_simple_progressive.json' ? 'ring-2 ring-gold' : ''}`}
+          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border ${presetFilename === 'past_simple_progressive.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <div>Past Simple/Progressive</div>
           <div className="text-[10px] opacity-75 mt-1">תרגול</div>
@@ -207,7 +207,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
             // Navigate to learning mode
             onWordsReady([], 'learn_past_tense');
           }}
-          className="heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95"
+          className="heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border"
         >
           <div>Past Simple/Progressive</div>
           <div className="text-[10px] opacity-75 mt-1">לימוד</div>

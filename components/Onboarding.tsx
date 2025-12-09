@@ -60,8 +60,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
 
         <div className="relative z-10">
           <div className="text-center mb-4 sm:mb-6">
-            <h1 className="text-lg sm:text-xl font-bold mb-2 text-cream">
-              👋 היי, {googleUser?.name || 'משתמש'}
+            <h1 className="text-lg sm:text-xl font-bold mb-2 text-gold">
+              היי, {googleUser?.name || 'משתמש'}
             </h1>
           </div>
 
@@ -157,9 +157,9 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             <button
               type="submit"
               disabled={!name.trim()}
-              className="w-full btn-3d btn-primary-gold py-3 px-5 rounded-xl text-base sm:text-lg shadow-lg mt-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full btn-primary-gold py-3 px-5 rounded-xl text-base sm:text-lg shadow-lg mt-3 disabled:opacity-50 disabled:cursor-not-allowed btn-with-gold-border"
             >
-              {getGenderedText({ gender } as User, '🚀 בוא נתחיל!', '🚀 בואי נתחיל!', '🚀 בוא/י נתחיל!')}
+              {getGenderedText({ gender } as User, 'בוא נתחיל', 'בואי נתחיל', 'בוא/י נתחיל')}
             </button>
           </form>
         </div>

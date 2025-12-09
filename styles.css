@@ -232,6 +232,19 @@
   background-color: transparent;
   box-shadow: 0 0 30px rgba(240, 209, 112, 0.3);
 }
+.gold-divider {
+  background-color: var(--accent-gold);
+  height: 1px;
+  width: 100%;
+}
+.zoom-hint-btn {
+  background-color: var(--accent-gold);
+  color: var(--btn-text);
+  border-color: var(--accent-gold);
+}
+.btn-with-gold-border {
+  border: 1px solid var(--accent-gold);
+}
 
 /* ============================================
    Login Screen Styling - Gamification Theme

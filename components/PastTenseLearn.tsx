@@ -41,8 +41,8 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
       <div className="bg-slate-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-700 neon-border flex flex-col h-full">
         {/* Header with Two Back Buttons */}
         <div className="relative p-3 sm:p-6 pb-3 sm:pb-4 border-b border-slate-700 flex-shrink-0">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-center text-white neon-text-glow pr-32 sm:pr-44">
-            📚 לימוד Past Simple / Progressive
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-center pr-32 sm:pr-44 text-gold">
+            לימוד Past Simple / Progressive
           </h2>
           <div className="absolute top-3 sm:top-6 right-3 sm:right-6 flex gap-2">
             <BackButton onClick={onBackToSettings} small>
@@ -73,25 +73,24 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
               }}
             />
             {/* Zoom hint - icon only on mobile, text on desktop */}
-            <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-yellow-600/90 text-slate-900 px-2 py-1 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-bold shadow-lg">
-              <span className="sm:hidden">🔍</span>
-              <span className="hidden sm:inline">🔍 לחץ להגדלה</span>
+            <div className="absolute top-2 left-2 sm:top-4 sm:left-4 px-2 py-1 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-bold shadow-lg border zoom-hint-btn">
+              <span className="sm:hidden">▲</span>
+              <span className="hidden sm:inline">▲ לחץ להגדלה</span>
             </div>
           </div>
 
           {/* Zoomed Image Modal */}
           {isZoomed && (
             <div 
-              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-zoom-out overflow-auto"
+              className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 cursor-zoom-out overflow-auto"
+              style={{zIndex: 9999, touchAction: 'manipulation'}}
               onClick={() => setIsZoomed(false)}
-              style={{ touchAction: 'pan-x pan-y pinch-zoom' }}
             >
               <div className="relative w-full h-full flex items-center justify-center">
                 <img
                   src={infographics[currentSlide].image}
                   alt={infographics[currentSlide].title}
                   className="max-w-full max-h-full object-contain"
-                  style={{ touchAction: 'pinch-zoom' }}
                   onClick={(e) => e.stopPropagation()}
                 />
                 <button 
