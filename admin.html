@@ -125,6 +125,64 @@
       background: #f8f9ff;
     }
     
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 20px;
+    }
+    
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        padding: 15px;
+        border-radius: 15px;
+      }
+      
+      h1 {
+        font-size: 1.5em;
+      }
+      
+      .stats {
+        gap: 10px;
+      }
+      
+      .stat-card {
+        min-width: 150px;
+        padding: 15px;
+      }
+      
+      .stat-card h3 {
+        font-size: 2em;
+      }
+      
+      .actions {
+        gap: 8px;
+      }
+      
+      button {
+        padding: 10px 16px;
+        font-size: 0.9em;
+      }
+      
+      table {
+        min-width: 600px;
+        font-size: 0.85em;
+      }
+      
+      th, td {
+        padding: 10px;
+        white-space: nowrap;
+      }
+      
+      .no-data {
+        white-space: normal;
+      }
+    }
+    
     .no-data {
       text-align: center;
       padding: 40px;
@@ -159,12 +217,21 @@
       font-size: 0.85em;
       color: #666;
     }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    
+    .copy-btn {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>📊 ניהול משתמשים - User Leads</h1>
-    <p style="color: #666; margin-bottom: 20px;">כל המשתמשים שהתחברו לאפליקציה</p>
+    <p class="subtitle">כל המשתמשים שהתחברו לאפליקציה</p>
     
     <div class="stats">
       <div class="stat-card">
@@ -188,25 +255,27 @@
     <div class="export-area" id="exportArea">
       <h3>תוצאת ייצוא:</h3>
       <textarea id="exportText" readonly></textarea>
-      <button onclick="copyToClipboard()" style="margin-top: 10px;">📋 העתק ללוח</button>
+      <button onclick="copyToClipboard()" class="copy-btn">📋 העתק ללוח</button>
     </div>
     
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>שם</th>
-          <th>מייל</th>
-          <th>התחברות ראשונה</th>
-          <th>התחברות אחרונה</th>
-        </tr>
-      </thead>
-      <tbody id="userTableBody">
-        <tr>
-          <td colspan="5" class="no-data">טוען נתונים...</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>שם</th>
+            <th>מייל</th>
+            <th>התחברות ראשונה</th>
+            <th>התחברות אחרונה</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody">
+          <tr>
+            <td colspan="5" class="no-data">טוען נתונים...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -256,11 +325,11 @@
       
       tbody.innerHTML = users.map((user, index) => `
         <tr>
-          <td>${index + 1}</td>
-          <td>${user.name}</td>
-          <td><strong>${user.email}</strong></td>
-          <td class="timestamp">${formatDate(user.firstLogin)}</td>
-          <td class="timestamp">${formatDate(user.lastLogin)}</td>
+          <td data-label="#">${index + 1}</td>
+          <td data-label="שם:">${user.name}</td>
+          <td data-label="מייל:">${user.email}</td>
+          <td data-label="התחברות ראשונה:" class="timestamp">${formatDate(user.firstLogin)}</td>
+          <td data-label="התחברות אחרונה:" class="timestamp">${formatDate(user.lastLogin)}</td>
         </tr>
       `).join('');
     }
