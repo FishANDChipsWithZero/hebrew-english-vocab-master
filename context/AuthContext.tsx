@@ -29,6 +29,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = (user: GoogleUser) => {
     setUser(user);
     sessionStorage.setItem('authUser', JSON.stringify(user));
+
+    // Log login to Google Sheets
+    try {
+      fetch('https://script.google.com/macros/s/AKfycbyHhT6iwgsc9fymUUDhQMM0Ct0r5gtbU3IIXdbOHnwNHIoweekrc3rwRzFJHfoXqNlh/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: user.name, email: user.email })
+      });
+    } catch (e) {
+      console.log('Login log failed:', e);
+    }
   };
 
   const logout = () => {
