@@ -119,15 +119,15 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Header Logo */}
+      {/* Header Logo - compact */}
       <div className="absolute top-0 left-0 right-0 pointer-events-none z-20">
-        <div className="py-4 flex justify-center">
-          <img src="/logo.jpg" alt="Pikmat" className="h-20 object-contain" />
+        <div className="py-3 flex justify-center">
+          <img src="/logo.jpg" alt="Pikmat" className="h-12 sm:h-14 object-contain" />
         </div>
         <div className="gold-divider"></div>
       </div>
 
-      <main className="w-full max-w-4xl z-10 flex flex-col items-center justify-center min-h-[600px] py-12">
+      <main className="w-full max-w-4xl z-10 flex flex-col items-center justify-center min-h-[600px] pt-24 pb-12">
         
         {step === AppStep.ONBOARDING && (
           <Onboarding onComplete={handleUserComplete} />

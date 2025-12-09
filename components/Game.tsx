@@ -524,13 +524,13 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
   return (
     <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
       {/* Top Bar: User & Score */}
-      <div className="flex items-center justify-between bg-slate-800/80 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg p-2 sm:p-3 mb-4 sm:mb-6 border border-slate-600 relative overflow-hidden neon-border">
+      <div className="flex items-center justify-between bg-luxury-card backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg p-2 sm:p-3 mb-4 sm:mb-6 border luxury-container relative overflow-hidden">
         <div className="flex items-center gap-2 sm:gap-3 z-10">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-700 border border-slate-500 flex items-center justify-center text-xl sm:text-2xl shadow-inner flex-shrink-0 overflow-hidden">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-luxury-card border border-gold flex items-center justify-center text-xl sm:text-2xl shadow-inner flex-shrink-0 overflow-hidden">
             {user.avatar ? (
               <img src={`/avatars/${user.avatar}`} alt={`${user.name} avatar`} className={`avatar-img ${avatarPosClass}`} />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-white font-bold bg-slate-700">{(user.name || '').charAt(0).toUpperCase() || 'ת'}</div>
+              <div className="w-full h-full flex items-center justify-center text-gold font-bold bg-luxury-card">{(user.name || '').charAt(0).toUpperCase() || 'ת'}</div>
             )}
           </div>
           <div className="overflow-hidden">
@@ -542,35 +542,32 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
         </div>
         
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Two back buttons - one for settings, one for practice selection */}
-          <div className="relative z-10">
-            <BackButton onClick={() => {
-              // Save progress before going back
+          {/* Icon buttons - settings gear and back arrow */}
+          <button 
+            onClick={() => {
               persistProgress(activeWords);
               onBackToSettings?.();
-            }} small>
-              הגדרות
-            </BackButton>
-          </div>
-          <div className="relative z-10">
-            <BackButton onClick={() => {
-              // Save progress before going back
+            }}
+            className="p-2 rounded-lg text-2xl opacity-60 hover:opacity-100 transition-opacity"
+            title="הגדרות"
+          >
+            ⚙️
+          </button>
+          <button 
+            onClick={() => {
               persistProgress(activeWords);
               onBack?.();
-            }} small>
-              תרגולים
-            </BackButton>
-          </div>
-            {/* Share button removed for classroom-only mode */}
+            }}
+            className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center text-2xl hover:bg-gold hover:text-btn transition-all"
+            title="חזרה"
+          >
+            ➜
+          </button>
 
             {/* Mute Toggle */}
             <button 
                 onClick={() => setIsMuted(!isMuted)}
-                className={`p-2 rounded-full border transition-all ${
-                    isMuted 
-                    ? 'border-red-500 bg-red-900/20 text-red-400' 
-                    : 'border-slate-500 bg-slate-700/50 text-slate-300 hover:text-white'
-                }`}
+                className="p-2 rounded-lg text-xl opacity-60 hover:opacity-100 transition-opacity"
                 title={isMuted ? "הפעל סאונד" : "השתק סאונד"}
             >
                 {isMuted ? '🔇' : '🔊'}
@@ -642,7 +639,7 @@ const Game: React.FC<GameProps> = ({ words, user, presetFilename, onFinish, onBa
             <button 
               onClick={playAudio}
               type="button"
-              className="relative z-10 btn-3d bg-yellow-600 hover:bg-yellow-500 hover:shadow-yellow-500/50 text-slate-900 border-b-4 border-yellow-900 rounded-xl px-3 py-1.5 flex items-center gap-1.5 font-bold text-xs sm:text-sm transition-all active:border-b-0 active:translate-y-1 shadow-lg shadow-yellow-900/50 hover:shadow-xl mt-1"
+              className="relative z-10 btn-primary-gold rounded-xl px-3 py-1.5 flex items-center gap-1.5 font-bold text-xs sm:text-sm transition-all mt-1"
             >
               <span className="text-sm">🔊</span> שמע הגייה
             </button>

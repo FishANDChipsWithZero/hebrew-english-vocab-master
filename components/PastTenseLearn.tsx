@@ -38,25 +38,27 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
 
   return (
     <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 animate-slide-up flex flex-col h-[calc(100vh-8rem)]">
-      <div className="bg-slate-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-700 neon-border flex flex-col h-full">
-        {/* Header with Two Back Buttons */}
-        <div className="relative p-3 sm:p-6 pb-3 sm:pb-4 border-b border-slate-700 flex-shrink-0">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-center pr-32 sm:pr-44 text-gold">
+      <div className="bg-luxury-card backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl border luxury-container flex flex-col h-full">
+        {/* Header with Navigation Icons */}
+        <div className="relative p-3 sm:p-6 pb-3 sm:pb-4 border-b border-gold flex-shrink-0">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-center text-gold">
             לימוד Past Simple / Progressive
           </h2>
-          <div className="absolute top-3 sm:top-6 right-3 sm:right-6 flex gap-2">
-            <BackButton onClick={onBackToSettings} small>
-              הגדרות
-            </BackButton>
-            <BackButton onClick={onBack} small>
-              תרגולים
-            </BackButton>
+          <div className="absolute top-3 sm:top-6 left-3 sm:left-6">
+            <button onClick={onBackToSettings} className="p-2 rounded-lg text-2xl opacity-60 hover:opacity-100 transition-opacity" title="הגדרות">
+              ⚙️
+            </button>
+          </div>
+          <div className="absolute top-3 sm:top-6 right-3 sm:right-6">
+            <button onClick={onBack} className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center text-2xl hover:bg-gold hover:text-btn transition-all" title="חזרה">
+              ➜
+            </button>
           </div>
         </div>
 
         {/* Scrollable Infographic Display */}
         <div className="flex-1 overflow-y-auto p-3 sm:p-6">
-          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-yellow-400 text-center mb-3 sm:mb-4">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gold text-center mb-3 sm:mb-4">
             {infographics[currentSlide].title}
           </h3>
           
@@ -66,7 +68,7 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
             <img
               src={infographics[currentSlide].image}
               alt={infographics[currentSlide].title}
-              className="w-full h-auto max-w-full rounded-lg shadow-lg mx-auto block"
+              className="w-full h-auto max-w-full max-h-[65vh] object-contain rounded-lg shadow-lg mx-auto block"
               onError={(e) => {
                 // Fallback if image doesn't exist
                 (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23334155" width="400" height="300"/%3E%3Ctext fill="%23cbd5e1" font-family="Arial" font-size="20" x="50%25" y="50%25" text-anchor="middle" dominant-baseline="middle"%3E%D7%94%D7%95%D7%A1%D7%A3 %D7%90%D7%AA %D7%94%D7%90%D7%99%D7%A0%D7%A4%D7%95%D7%92%D7%A8%D7%A4%D7%99%D7%A7%D7%94 %D7%9B%D7%90%D7%9F%3C/text%3E%3C/svg%3E';
@@ -82,8 +84,7 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
           {/* Zoomed Image Modal */}
           {isZoomed && (
             <div 
-              className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 cursor-zoom-out overflow-auto"
-              style={{zIndex: 9999, touchAction: 'manipulation'}}
+              className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 cursor-zoom-out overflow-auto infographic-modal zoom-modal"
               onClick={() => setIsZoomed(false)}
             >
               <div className="relative w-full h-full flex items-center justify-center">
@@ -118,10 +119,10 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
         <div className="flex items-center justify-between gap-2 mb-3 sm:mb-4">
           <button
             onClick={prevSlide}
-            className="btn-3d bg-yellow-600 hover:bg-yellow-500 text-slate-900 font-bold py-2 sm:py-3 px-3 sm:px-6 rounded-lg sm:rounded-xl transition-all text-sm sm:text-base"
+            className="btn-primary-gold font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-xl transition-all text-base sm:text-lg btn-with-gold-border"
           >
-            <span className="hidden sm:inline">← הקודם</span>
-            <span className="sm:hidden">←</span>
+            <span className="hidden sm:inline">הבא →</span>
+            <span className="sm:hidden">→</span>
           </button>
 
           {/* Slide Indicators */}
@@ -133,8 +134,8 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
                 aria-label={`עבור לשקופית ${index + 1}`}
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
                   currentSlide === index
-                    ? 'bg-yellow-400 w-6 sm:w-8'
-                    : 'bg-slate-600 hover:bg-slate-500'
+                    ? 'bg-gold w-6 sm:w-8'
+                    : 'bg-luxury-card border border-gold/30 hover:border-gold/60'
                 }`}
               />
             ))}
@@ -142,10 +143,10 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
 
           <button
             onClick={nextSlide}
-            className="btn-3d bg-yellow-600 hover:bg-yellow-500 text-slate-900 font-bold py-2 sm:py-3 px-3 sm:px-6 rounded-lg sm:rounded-xl transition-all text-sm sm:text-base"
+            className="btn-primary-gold font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-xl transition-all text-base sm:text-lg btn-with-gold-border"
           >
-            <span className="hidden sm:inline">הבא →</span>
-            <span className="sm:hidden">→</span>
+            <span className="hidden sm:inline">← הקודם</span>
+            <span className="sm:hidden">←</span>
           </button>
         </div>
 
@@ -155,9 +156,9 @@ const PastTenseLearn: React.FC<PastTenseLearnProps> = ({ onBack, onBackToSetting
         </div>
 
         {/* Instructions */}
-        <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center">
-          <p className="text-yellow-300 text-xs sm:text-sm font-bold mb-1 sm:mb-2">💡 עצה</p>
-          <p className="text-slate-300 text-xs sm:text-sm">
+        <div className="border rounded-xl p-3 sm:p-4 text-center tip-box">
+          <p className="text-gold text-xs sm:text-sm font-bold mb-1 sm:mb-2">עצה</p>
+          <p className="text-cream text-xs sm:text-sm">
             לאחר לימוד החומר, חזור לדף הבחירה ובחר "Past Simple / Progressive - תרגול" כדי לתרגל את מה שלמדת!
           </p>
         </div>

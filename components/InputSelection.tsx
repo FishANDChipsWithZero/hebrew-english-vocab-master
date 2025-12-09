@@ -103,17 +103,17 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
 
   return (
     <>
-    <div className="w-full max-w-2xl mx-auto bg-slate-800/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-slate-700 animate-slide-up relative z-10 neon-border">
+    <div className="w-full max-w-2xl mx-auto bg-luxury-card backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border animate-slide-up relative z-10 luxury-container">
       <div className="relative mb-3 sm:mb-5">
         <h2 className="text-base sm:text-lg md:text-xl font-black text-center text-white neon-text-glow pr-12 sm:pr-0 heebo-font">
           {getGenderedText(user, 'בחר מה ללמוד/לתרגל', 'בחרי מה ללמוד/לתרגל', 'בחר/י מה ללמוד/לתרגל')}
         </h2>
-        {/** Back button to return to onboarding (only shown when handler provided) */}
+        {/** Navigation buttons */}
         {typeof onBack === 'function' && (
-          <div className="absolute top-0 right-0">
-            <BackButton onClick={() => onBack && onBack()} small>
-              הגדרות
-            </BackButton>
+          <div className="absolute top-0 left-0">
+            <button onClick={() => onBack && onBack()} className="p-2 rounded-lg text-2xl opacity-60 hover:opacity-100 transition-opacity" title="הגדרות">
+              ⚙️
+            </button>
           </div>
         )}
       </div>
@@ -148,14 +148,14 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border ${presetFilename === 'unit2_new_direction_plus.json' ? 'ring-2 ring-gold' : ''}`}
+          className={`heebo-font btn-secondary-gold font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'unit2_new_direction_plus.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <div>תרגול מילים</div>
         </button>
 
         <button
           onClick={() => setShowVocab(true)}
-          className="heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border"
+          className="heebo-font btn-secondary-gold font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95"
         >
           <div>אוצר המילים</div>
         </button>
@@ -174,7 +174,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font col-span-2 btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border ${presetFilename === 'sentences_practice.json' ? 'ring-2 ring-gold' : ''}`}
+          className={`heebo-font col-span-2 btn-secondary-gold font-bold py-4 px-4 rounded-xl shadow-lg text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'sentences_practice.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <span className="align-middle">תרגול משפטים</span>
         </button>
@@ -196,7 +196,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
               setLoading(false);
             }
           }}
-          className={`heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border ${presetFilename === 'past_simple_progressive.json' ? 'ring-2 ring-gold' : ''}`}
+          className={`heebo-font btn-secondary-gold font-bold py-4 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 ${presetFilename === 'past_simple_progressive.json' ? 'ring-2 ring-gold' : ''}`}
         >
           <div>Past Simple/Progressive</div>
           <div className="text-[10px] opacity-75 mt-1">תרגול</div>
@@ -207,7 +207,7 @@ const InputSelection: React.FC<InputSelectionProps> = ({ user, onWordsReady, set
             // Navigate to learning mode
             onWordsReady([], 'learn_past_tense');
           }}
-          className="heebo-font btn-3d bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95 btn-with-gold-border"
+          className="heebo-font btn-secondary-gold font-bold py-4 px-4 rounded-xl shadow-lg text-xs sm:text-sm transition-transform transform hover:scale-105 active:scale-95"
         >
           <div>Past Simple/Progressive</div>
           <div className="text-[10px] opacity-75 mt-1">לימוד</div>

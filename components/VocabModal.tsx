@@ -131,28 +131,34 @@ const VocabModal: React.FC<VocabModalProps> = ({ open, onClose }) => {
   if (!open) return null;
 
   return (
-    <div className="vocab-modal-overlay" role="dialog" aria-modal="true">
-      <div className="vocab-modal-content">
-        <div className="vocab-modal-header">
-          <div>
-            <h2 className="text-lg font-extrabold hebrew-text">אוצר המילים</h2>
-            <div className="text-xs text-slate-400 hebrew-text">גלול למטה כדי לראות את כל הקבוצות</div>
-          </div>
-          <div>
-            <BackButton onClick={onClose} small>סגור</BackButton>
-          </div>
+    <div className={`fixed inset-0 flex items-center justify-center z-50 transition-all duration-300 ${
+      open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+    }`}>
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+        onClick={onClose}
+      ></div>
+      
+      {/* Modal Container - Fixed size, internal scroll only */}
+      <div className="relative bg-luxury-card backdrop-blur-xl rounded-2xl shadow-2xl border luxury-container w-[95vw] h-[85vh] max-w-4xl flex flex-col overflow-hidden animate-scale-up">
+        {/* Header */}
+        <div className="flex-shrink-0 border-b border-gold px-4 sm:px-6 py-3 flex justify-between items-center">
+          <h2 className="text-xl sm:text-2xl font-black text-gold hebrew-text">מחסן מילים</h2>
+          <button onClick={onClose} className="p-2 rounded-lg text-2xl opacity-60 hover:opacity-100 transition-opacity font-bold" title="סגור">×</button>
         </div>
 
-        <div className="vocab-modal-body">
+        {/* Content Area - Scrollable */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
           {groups.map((g, gi) => (
-            <div key={gi} className="vocab-group">
-              <h3 className="hebrew-text">{g.title}</h3>
-              <div className="text-sm text-slate-300 mb-2 hebrew-text">{g.desc}</div>
-              <div className="vocab-list">
+            <div key={gi} className="bg-luxury-card border border-gold/30 rounded-xl p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-gold mb-2 hebrew-text">{g.title}</h3>
+              <div className="text-sm text-cream/70 mb-4 hebrew-text">{g.desc}</div>
+              <div className="space-y-2">
                 {g.items.map(([eng, heb], idx) => (
-                  <div key={idx} className="vocab-item">
-                    <div className="eng" dir="ltr">{eng}</div>
-                    <div className="ml-auto heb" dir="rtl">{heb}</div>
+                  <div key={idx} className="flex justify-between items-center py-2 px-3 rounded-lg bg-slate-900/30 hover:bg-slate-900/50 transition-colors border border-gold/10">
+                    <div className="font-medium text-cream" dir="ltr">{eng}</div>
+                    <div className="font-medium text-gold" dir="rtl">{heb}</div>
                   </div>
                 ))}
               </div>

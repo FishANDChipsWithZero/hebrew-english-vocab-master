@@ -59,12 +59,6 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         <div className="absolute -bottom-28 -left-36 w-28 h-28 rounded-full blur-[60px] opacity-10 pointer-events-none -z-10 gold-glow-blob-light"></div>
 
         <div className="relative z-10">
-          <div className="text-center mb-4 sm:mb-6">
-            <h1 className="text-lg sm:text-xl font-bold mb-2 text-gold">
-              היי, {googleUser?.name || 'משתמש'}
-            </h1>
-          </div>
-
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs sm:text-sm font-bold mb-1.5 text-cream">שם משתמש:</label>
@@ -86,8 +80,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   onClick={() => setGender('male')}
                   className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'male'
-                      ? 'bg-yellow-600 text-slate-900 ring-2 ring-yellow-400'
-                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-yellow-500'
+                      ? 'bg-gold text-btn ring-2 ring-gold'
+                      : 'bg-slate-900/50 text-slate-400 border btn-with-gold-border hover:border-gold'
                   }`}
                 >
                   זכר
@@ -97,8 +91,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   onClick={() => setGender('female')}
                   className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'female'
-                      ? 'bg-yellow-600 text-slate-900 ring-2 ring-yellow-400'
-                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-yellow-500'
+                      ? 'bg-gold text-btn ring-2 ring-gold'
+                      : 'bg-slate-900/50 text-slate-400 border btn-with-gold-border hover:border-gold'
                   }`}
                 >
                   נקבה
@@ -108,8 +102,8 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   onClick={() => setGender('other')}
                   className={`flex-1 py-2 px-3 rounded-xl font-bold text-sm transition-all ${
                     gender === 'other'
-                      ? 'bg-yellow-600 text-slate-900 ring-2 ring-yellow-400'
-                      : 'bg-slate-900/50 text-slate-400 border border-slate-600 hover:border-yellow-500'
+                      ? 'bg-gold text-btn ring-2 ring-gold'
+                      : 'bg-slate-900/50 text-slate-400 border btn-with-gold-border hover:border-gold'
                   }`}
                 >
                   אחר

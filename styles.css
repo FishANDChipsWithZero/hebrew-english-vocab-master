@@ -234,8 +234,19 @@
 }
 .gold-divider {
   background-color: var(--accent-gold);
-  height: 1px;
+  height: 0.5px;
   width: 100%;
+  opacity: 0.7;
+}
+.tip-box {
+  background-color: rgba(240, 209, 112, 0.1);
+  border-color: var(--border-gold);
+}
+.infographic-modal {
+  z-index: 9999;
+}
+.zoom-modal {
+  touch-action: manipulation;
 }
 .zoom-hint-btn {
   background-color: var(--accent-gold);
